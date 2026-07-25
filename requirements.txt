@@ -23,6 +23,7 @@ streamlit
 flask
 
 # Data Formats & Serialization
+duckdb
 pyarrow
 fastparquet
 openpyxl
