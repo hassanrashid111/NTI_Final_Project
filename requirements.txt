@@ -1,0 +1,32 @@
+# Core
+numpy
+pandas
+scipy
+
+# Visualization
+matplotlib
+seaborn
+plotly
+
+# Machine Learning
+scikit-learn
+catboost
+lightgbm
+
+# Deep Learning
+torch
+pytorch-forecasting
+pytorch-lightning
+
+# Deployment
+streamlit
+flask
+
+# Data Format
+pyarrow
+openpyxl
+
+# Utilities
+pyyaml
+tqdm
+joblib

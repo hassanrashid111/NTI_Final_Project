@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (too large for GitHub)
+01_Dataset/raw/*.csv
+01_Dataset/raw/*.zip
+01_Dataset/processed/*.parquet
+01_Dataset/features/*.parquet
+01_Dataset/predictions/*.csv
+*.zip
+
+# Models (too large for GitHub)
+03_Models/*.pkl
+03_Models/*.joblib
+03_Models/*.pt
+03_Models/*.cbm
+03_Models/*.h5
+
+# Environment
+.env
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Kaggle
+kaggle.json
+
+# Logs
+*.log
+mlruns/

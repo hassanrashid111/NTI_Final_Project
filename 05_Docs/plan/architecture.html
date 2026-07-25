@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture & Tech Stack — AI Demand Forecasting</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand"><span class="icon">🚀</span><span>AI Demand Forecasting</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="requirements.html">Requirements</a></li>
+      <li><a href="phases.html">Phases</a></li>
+      <li><a href="dataset.html">Dataset</a></li>
+      <li><a href="architecture.html" class="active">Architecture</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="colab.html">Colab Guide</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+
+      <section class="page-hero">
+        <div class="badge fade-in">🏗️ System Design</div>
+        <h1 class="fade-in stagger-1">Architecture & Tech Stack</h1>
+        <p class="subtitle fade-in stagger-2">
+          هيكل المشروع الاحترافي، التقنيات المستخدمة، ومعمارية الـ Deployment
+        </p>
+      </section>
+
+      <!-- Tech Stack -->
+      <section class="section">
+        <div class="section-header fade-in">
+          <h2><span class="icon">🛠️</span> Technology Stack</h2>
+        </div>
+
+        <div class="table-wrapper fade-in">
+          <table>
+            <thead>
+              <tr><th>Category</th><th>Technology</th><th>Version</th><th>Purpose</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Language</strong></td><td>Python</td><td>3.10+</td><td>Core language</td></tr>
+              <tr><td><strong>Data Processing</strong></td><td>Pandas, NumPy, Polars</td><td>Latest</td><td>Data manipulation (Polars for large data)</td></tr>
+              <tr><td><strong>Visualization</strong></td><td>Matplotlib, Seaborn, Plotly</td><td>Latest</td><td>Static & interactive charts</td></tr>
+              <tr><td><strong>ML — Traditional</strong></td><td>Scikit-learn</td><td>Latest</td><td>Baseline models, preprocessing, metrics</td></tr>
+              <tr><td><strong>ML — Gradient Boosting</strong></td><td>CatBoost, LightGBM</td><td>Latest</td><td>Primary prediction models</td></tr>
+              <tr><td><strong>ML — Deep Learning</strong></td><td>PyTorch, PyTorch Forecasting</td><td>Latest</td><td>TFT model</td></tr>
+              <tr><td><strong>Deployment — ML</strong></td><td>Streamlit</td><td>Latest</td><td>ML forecasting app</td></tr>
+              <tr><td><strong>Deployment — BI</strong></td><td>Flask, Jinja2</td><td>Latest</td><td>BI dashboard</td></tr>
+              <tr><td><strong>Frontend (Flask)</strong></td><td>Bootstrap 5, Plotly.js, Chart.js</td><td>Latest</td><td>Dashboard UI</td></tr>
+              <tr><td><strong>Version Control</strong></td><td>Git, GitHub</td><td>—</td><td>Code management</td></tr>
+              <tr><td><strong>Config</strong></td><td>YAML, Python dataclasses</td><td>—</td><td>Configuration management</td></tr>
+              <tr><td><strong>Testing</strong></td><td>pytest</td><td>Latest</td><td>Unit & integration tests</td></tr>
+              <tr><td><strong>Development</strong></td><td>Google Colab, VS Code</td><td>—</td><td>Development environment</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Repository Structure -->
+      <section class="section">
+        <div class="section-header fade-in">
+          <h2><span class="icon">📁</span> Repository Structure</h2>
+          <p>هيكل المشروع على GitHub</p>
+        </div>
+
+        <div class="card fade-in">
+          <div class="tree">
+<span class="folder">AI-Demand-Forecasting/</span>
+│
+├── <span class="folder">app/</span>                              <span class="comment"># Deployment</span>
+│   ├── <span class="folder">streamlit_app/</span>
+│   │   ├── <span class="file">app.py</span>                    <span class="comment"># Main Streamlit app</span>
+│   │   ├── <span class="folder">pages/</span>
+│   │   │   ├── <span class="file">01_📊_Dashboard.py</span>
+│   │   │   ├── <span class="file">02_🔮_Forecast.py</span>
+│   │   │   ├── <span class="file">03_📦_Inventory.py</span>
+│   │   │   └── <span class="file">04_📈_Model_Comparison.py</span>
+│   │   ├── <span class="folder">components/</span>
+│   │   └── <span class="folder">utils/</span>
+│   │
+│   └── <span class="folder">flask_dashboard/</span>
+│       ├── <span class="file">app.py</span>                    <span class="comment"># Main Flask app</span>
+│       ├── <span class="folder">templates/</span>               <span class="comment"># Jinja2 HTML templates</span>
+│       ├── <span class="folder">static/</span>
+│       │   ├── <span class="folder">css/</span>
+│       │   ├── <span class="folder">js/</span>
+│       │   └── <span class="folder">assets/</span>
+│       └── <span class="folder">routes/</span>                  <span class="comment"># API endpoints</span>
+│
+├── <span class="folder">data/</span>
+│   ├── <span class="folder">raw/</span>                         <span class="comment"># Original dataset files</span>
+│   ├── <span class="folder">interim/</span>                     <span class="comment"># Intermediate processed data</span>
+│   ├── <span class="folder">processed/</span>                   <span class="comment"># Final cleaned data</span>
+│   ├── <span class="folder">external/</span>                    <span class="comment"># External data</span>
+│   └── <span class="folder">feature_store/</span>               <span class="comment"># Engineered features</span>
+│
+├── <span class="folder">notebooks/</span>                        <span class="comment"># Jupyter/Colab notebooks</span>
+│   ├── <span class="file">01_business_understanding.ipynb</span>
+│   ├── <span class="file">02_dataset_exploration.ipynb</span>
+│   ├── <span class="file">03_eda.ipynb</span>
+│   ├── <span class="file">04_cleaning.ipynb</span>
+│   ├── <span class="file">05_feature_engineering.ipynb</span>
+│   ├── <span class="file">06_baseline_models.ipynb</span>
+│   ├── <span class="file">07_catboost.ipynb</span>
+│   ├── <span class="file">08_lightgbm.ipynb</span>
+│   ├── <span class="file">09_tft.ipynb</span>
+│   ├── <span class="file">10_evaluation.ipynb</span>
+│   └── <span class="file">11_inventory_optimization.ipynb</span>
+│
+├── <span class="folder">src/</span>                              <span class="comment"># Source code modules</span>
+│   ├── <span class="file">__init__.py</span>
+│   ├── <span class="folder">config/</span>                      <span class="comment"># Settings & paths</span>
+│   ├── <span class="folder">data/</span>                        <span class="comment"># Data loading & cleaning</span>
+│   ├── <span class="folder">features/</span>                    <span class="comment"># Feature engineering</span>
+│   ├── <span class="folder">models/</span>                      <span class="comment"># Model implementations</span>
+│   ├── <span class="folder">training/</span>                    <span class="comment"># Training pipeline</span>
+│   ├── <span class="folder">evaluation/</span>                  <span class="comment"># Metrics & comparison</span>
+│   ├── <span class="folder">forecast/</span>                    <span class="comment"># Inference pipeline</span>
+│   ├── <span class="folder">inventory/</span>                   <span class="comment"># Inventory optimization</span>
+│   ├── <span class="folder">visualization/</span>               <span class="comment"># Plot functions</span>
+│   └── <span class="folder">utils/</span>                       <span class="comment"># Utility functions</span>
+│
+├── <span class="folder">models/</span>                           <span class="comment"># Saved model artifacts</span>
+├── <span class="folder">reports/</span>                          <span class="comment"># Generated reports & figures</span>
+├── <span class="folder">docs/</span>                             <span class="comment"># Documentation</span>
+├── <span class="folder">presentation/</span>                    <span class="comment"># Presentation files</span>
+├── <span class="folder">assets/</span>                           <span class="comment"># Images, icons, diagrams</span>
+├── <span class="folder">tests/</span>                            <span class="comment"># pytest tests</span>
+├── <span class="folder">configs/</span>                          <span class="comment"># YAML config files</span>
+│
+├── <span class="file">requirements.txt</span>
+├── <span class="file">README.md</span>
+├── <span class="file">.gitignore</span>
+├── <span class="file">LICENSE</span>
+└── <span class="file">setup.py</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Source Code Modules -->
+      <section class="section">
+        <div class="section-header fade-in">
+          <h2><span class="icon">📦</span> Source Code Modules (src/)</h2>
+          <p>كل module ومسؤوليته</p>
+        </div>
+
+        <div class="card-grid fade-in">
+          <div class="card">
+            <div class="card-icon purple">⚙️</div>
+            <h3>config/</h3>
+            <p>Project settings, paths, constants. YAML-driven configuration.</p>
+            <div class="tags"><span class="tag">settings.py</span></div>
+          </div>
+          <div class="card">
+            <div class="card-icon blue">📂</div>
+            <h3>data/</h3>
+            <p>Data loading, cleaning, and validation utilities.</p>
+            <div class="tags"><span class="tag">loader.py</span><span class="tag">cleaner.py</span><span class="tag">validator.py</span></div>
+          </div>
+          <div class="card">
+            <div class="card-icon green">🔧</div>
+            <h3>features/</h3>
+            <p>Feature engineering pipeline — date, lag, rolling, external features.</p>
+            <div class="tags"><span class="tag">date_features.py</span><span class="tag">lag_features.py</span><span class="tag">builder.py</span></div>
+          </div>
+          <div class="card">
+            <div class="card-icon orange">🧠</div>
+            <h3>models/</h3>
+            <p>Model implementations — Baseline, CatBoost, LightGBM, TFT.</p>
+            <div class="tags"><span class="tag">catboost_model.py</span><span class="tag">lightgbm_model.py</span><span class="tag">tft_model.py</span></div>
+          </div>
+          <div class="card">
+            <div class="card-icon pink">🏋️</div>
+            <h3>training/</h3>
+            <p>Training pipeline & time-series cross-validation.</p>
+            <div class="tags"><span class="tag">trainer.py</span><span class="tag">cross_validation.py</span></div>
+          </div>
+          <div class="card">
+            <div class="card-icon cyan">📊</div>
+            <h3>evaluation/</h3>
+            <p>Metrics calculation & model comparison utilities.</p>
+            <div class="tags"><span class="tag">metrics.py</span><span class="tag">comparison.py</span></div>
+          </div>
+          <div class="card">
+            <div class="card-icon yellow">🔮</div>
+            <h3>forecast/</h3>
+            <p>Inference pipeline for generating predictions.</p>
+            <div class="tags"><span class="tag">predictor.py</span></div>
+          </div>
+          <div class="card">
+            <div class="card-icon red">📦</div>
+            <h3>inventory/</h3>
+            <p>Inventory optimization & restock recommendations.</p>
+            <div class="tags"><span class="tag">optimizer.py</span></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Deployment Architecture -->
+      <section class="section">
+        <div class="section-header fade-in">
+          <h2><span class="icon">🚀</span> Deployment Architecture</h2>
+          <p>معمارية النظام — Dual Deployment</p>
+        </div>
+
+        <div class="card fade-in">
+          <div class="code-block" style="text-align: center; font-size: 0.9rem;">
+┌─────────────────────────────────────────────────────────────┐
+│                    <span class="keyword">USER INTERFACE LAYER</span>                      │
+│                                                             │
+│   ┌─────────────────────┐    ┌─────────────────────────┐    │
+│   │   <span class="folder">Streamlit App</span>      │    │    <span class="folder">Flask Dashboard</span>     │    │
+│   │   (Port 8501)       │    │    (Port 5000)          │    │
+│   │                     │    │                         │    │
+│   │ • Dashboard         │    │ • Interactive Charts    │    │
+│   │ • Forecast Page     │    │ • REST API              │    │
+│   │ • Inventory Page    │    │ • Store Map             │    │
+│   │ • Model Comparison  │    │ • Data Export           │    │
+│   └────────┬────────────┘    └───────────┬─────────────┘    │
+│            │                             │                  │
+└────────────┼─────────────────────────────┼──────────────────┘
+             │                             │
+             ▼                             ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    <span class="keyword">ML ENGINE LAYER</span>                          │
+│                                                             │
+│   ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
+│   │<span class="string">Predictor</span> │  │<span class="string">Optimizer</span> │  │<span class="string">Evaluator</span> │  │ <span class="string">Plotter</span>  │   │
+│   └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘   │
+│        └──────────────┼─────────────┘             │         │
+│                       ▼                           │         │
+│              ┌────────────────┐                   │         │
+│              │  <span class="folder">Model Registry</span> │                   │         │
+│              │ .pkl / .joblib │                   │         │
+│              └────────┬───────┘                   │         │
+│                       │                           │         │
+└───────────────────────┼───────────────────────────┼─────────┘
+                        ▼                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│                     <span class="keyword">DATA LAYER</span>                              │
+│                                                             │
+│   ┌──────────┐  ┌───────────┐  ┌────────────────────────┐   │
+│   │ <span class="folder">Raw Data</span> │  │<span class="folder">Processed</span>  │  │   <span class="folder">Feature Store</span>       │   │
+│   │ (CSV)    │  │  (Parquet) │  │   (Parquet)            │   │
+│   └──────────┘  └───────────┘  └────────────────────────┘   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+          </div>
+        </div>
+      </section>
+
+      <!-- ML Pipeline -->
+      <section class="section">
+        <div class="section-header fade-in">
+          <h2><span class="icon">🔄</span> ML Pipeline Flow</h2>
+        </div>
+
+        <div class="card fade-in">
+          <div class="code-block" style="text-align: center; font-size: 0.9rem;">
+<span class="folder">Raw Data</span> → <span class="folder">Cleaning</span> → <span class="folder">Feature Engineering</span> → <span class="folder">Train/Val Split</span>
+                                                          │
+                                              ┌───────────┼───────────┐
+                                              ▼           ▼           ▼
+                                         <span class="string">CatBoost</span>    <span class="string">LightGBM</span>      <span class="string">TFT</span>
+                                              │           │           │
+                                              └───────────┼───────────┘
+                                                          ▼
+                                                   <span class="keyword">Evaluation</span>
+                                                   (RMSE, MAE, MAPE)
+                                                          │
+                                                          ▼
+                                                   <span class="keyword">Best Model</span>
+                                                          │
+                                              ┌───────────┼───────────┐
+                                              ▼                       ▼
+                                        <span class="folder">Forecasting</span>         <span class="folder">Inventory</span>
+                                        <span class="folder">Engine</span>              <span class="folder">Optimizer</span>
+                                              │                       │
+                                              └───────────┼───────────┘
+                                                          ▼
+                                                   <span class="keyword">Deployment</span>
+                                              (Streamlit + Flask)
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>AI-Powered Demand Forecasting · NTI Capstone Project</p>
+      <p style="margin-top: 0.5rem;"><a href="index.html">← Back to Home</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

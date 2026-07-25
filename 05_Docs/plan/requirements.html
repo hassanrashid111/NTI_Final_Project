@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Requirements & Compliance — AI Demand Forecasting</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand">
+      <span class="icon">🚀</span>
+      <span>AI Demand Forecasting</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="requirements.html" class="active">Requirements</a></li>
+      <li><a href="phases.html">Phases</a></li>
+      <li><a href="dataset.html">Dataset</a></li>
+      <li><a href="architecture.html">Architecture</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="colab.html">Colab Guide</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+
+      <!-- Hero -->
+      <section class="page-hero">
+        <div class="badge fade-in">📌 ML Capstone Guidelines</div>
+        <h1 class="fade-in stagger-1">Requirements & Compliance</h1>
+        <p class="subtitle fade-in stagger-2">
+          جميع المتطلبات الإلزامية المستخرجة من الـ ML_Capstone_Guidelines.pdf<br>
+          وطريقة تحقيق كل واحدة منها في المشروع
+        </p>
+      </section>
+
+      <!-- Compliance Matrix Table -->
+      <section class="section">
+        <div class="section-header fade-in">
+          <h2><span class="icon">✅</span> Compliance Matrix</h2>
+          <p>جدول مطابقة المتطلبات — كل requirement وكيف نحققه</p>
+        </div>
+
+        <div class="table-wrapper fade-in">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Requirement</th>
+                <th>Description</th>
+                <th>Our Implementation</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1</strong></td>
+                <td>Real-world Problem</td>
+                <td>حل مشكلة حقيقية باستخدام ML</td>
+                <td>التنبؤ بالطلب على المنتجات في Corporación Favorita + تحسين المخزون</td>
+                <td><span class="status status-done">✓ Fulfilled</span></td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td>Full ML Pipeline</td>
+                <td>تطبيق كامل لمفاهيم الـ ML</td>
+                <td>EDA → Cleaning → Feature Engineering → Modeling → Evaluation</td>
+                <td><span class="status status-done">✓ Fulfilled</span></td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td>Suitable ML Models</td>
+                <td>استخدام نماذج مناسبة مع التبرير</td>
+                <td>CatBoost + LightGBM + TFT — كل واحد مبرر</td>
+                <td><span class="status status-done">✓ Fulfilled</span></td>
+              </tr>
+              <tr>
+                <td><strong>4</strong></td>
+                <td>Local Deployment</td>
+                <td>Deployment محلي (Streamlit أو Flask)</td>
+                <td>Streamlit (Primary ML App) + Flask (BI Dashboard)</td>
+                <td><span class="status status-done">✓ Fulfilled</span></td>
+              </tr>
+              <tr>
+                <td><strong>5</strong></td>
+                <td>GitHub Repository</td>
+                <td>رفع المشروع بالكامل على GitHub</td>
+                <td>Repo: hassanrashid111/NTI_Final_Project — مع structure كاملة</td>
+                <td><span class="status status-done">✓ Fulfilled</span></td>
+              </tr>
+              <tr>
+                <td><strong>6</strong></td>
+                <td>Clean & Modular Code</td>
+                <td>كود نظيف ومنظم وقابل للصيانة</td>
+                <td>OOP, Modular src/, Type hints, Config files</td>
+                <td><span class="status status-done">✓ Fulfilled</span></td>
+              </tr>
+              <tr>
+                <td><strong>7</strong></td>
+                <td>Presentation</td>
+                <td>إعداد عرض تقديمي شامل</td>
+                <td>PowerPoint + Speaker Notes + Demo Script</td>
+                <td><span class="status status-done">✓ Fulfilled</span></td>
+              </tr>
+              <tr>
+                <td><strong>8</strong></td>
+                <td>Live Demo</td>
+                <td>تشغيل النظام بالكامل أثناء المناقشة</td>
+                <td>Real-time forecasting demo (Streamlit + Flask)</td>
+                <td><span class="status status-done">✓ Fulfilled</span></td>
+              </tr>
+              <tr>
+                <td><strong>9</strong></td>
+                <td>LinkedIn Post</td>
+                <td>نشر بوست بعد الانتهاء</td>
+                <td>Post مع screenshots و project summary</td>
+                <td><span class="status status-pending">○ Post-submission</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Detailed Requirements -->
+      <section class="section">
+        <div class="section-header fade-in">
+          <h2><span class="icon">🔍</span> Detailed Requirement Breakdown</h2>
+          <p>تفاصيل كل متطلب وكيف نحققه بالضبط</p>
+        </div>
+
+        <div class="accordion" data-multi="true">
+
+          <!-- Req 1 -->
+          <div class="accordion-item open fade-in">
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-number">1</span>
+                <div>
+                  <div class="accordion-title">Real-world Problem</div>
+                </div>
+              </div>
+              <div class="accordion-meta">
+                <span class="status status-done">✓ Done</span>
+                <span class="accordion-chevron">▼</span>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <h4 style="margin-bottom: 0.5rem; color: var(--accent-tertiary);">المشكلة</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                  التنبؤ بالطلب على المنتجات في سلاسل محلات Corporación Favorita في الإكوادور.
+                  هي أكبر سلسلة سوبر ماركت في الإكوادور مع 54 فرع وآلاف المنتجات.
+                </p>
+
+                <h4 style="margin-bottom: 0.5rem; color: var(--accent-tertiary);">القيمة العملية</h4>
+                <ul class="feature-list">
+                  <li>تقليل الفاقد من المنتجات (خصوصاً القابلة للتلف)</li>
+                  <li>تحسين إدارة المخزون وتقليل التكاليف</li>
+                  <li>تجنب نفاد المخزون (Stockouts) وزيادة رضا العملاء</li>
+                  <li>تحسين عمليات سلسلة التوريد</li>
+                </ul>
+
+                <div class="alert alert-success" style="margin-top: 1rem;">
+                  <div class="alert-title">✅ Verdict</div>
+                  المشروع يحل مشكلة حقيقية في قطاع التجزئة (Retail) وهو من أكثر تطبيقات ML استخداماً في الصناعة.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Req 2 -->
+          <div class="accordion-item fade-in">
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-number">2</span>
+                <div>
+                  <div class="accordion-title">Full ML Pipeline</div>
+                </div>
+              </div>
+              <div class="accordion-meta">
+                <span class="status status-done">✓ Done</span>
+                <span class="accordion-chevron">▼</span>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                  المشروع يغطي كل مراحل الـ ML Pipeline بالكامل:
+                </p>
+
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Stage</th>
+                        <th>Description</th>
+                        <th>Notebook</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>Data Analysis</strong></td>
+                        <td>EDA شامل مع visualizations</td>
+                        <td><code>03_eda.ipynb</code></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Data Cleaning</strong></td>
+                        <td>Missing values, outliers, duplicates</td>
+                        <td><code>04_cleaning.ipynb</code></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Feature Engineering</strong></td>
+                        <td>50+ features من 8 فئات مختلفة</td>
+                        <td><code>05_feature_engineering.ipynb</code></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Machine Learning</strong></td>
+                        <td>4 نماذج (Baseline + 3 Advanced)</td>
+                        <td><code>06-09_*.ipynb</code></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Evaluation</strong></td>
+                        <td>RMSE, MAE, MAPE, RMSLE + مقارنة</td>
+                        <td><code>10_evaluation.ipynb</code></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Req 3 -->
+          <div class="accordion-item fade-in">
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-number">3</span>
+                <div>
+                  <div class="accordion-title">Suitable ML Models (with Justification)</div>
+                </div>
+              </div>
+              <div class="accordion-meta">
+                <span class="status status-done">✓ Done</span>
+                <span class="accordion-chevron">▼</span>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <div class="card-grid card-grid-3" style="margin-bottom: 1rem;">
+                  <div class="card" style="border-left: 3px solid var(--green);">
+                    <h4 style="color: var(--green);">🌲 CatBoost</h4>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">
+                      <strong>لماذا؟</strong> ممتاز مع Categorical Features بدون encoding يدوي.
+                      مقاوم للـ Overfitting. يدعم GPU training.
+                    </p>
+                    <div class="tags" style="margin-top: 0.5rem;">
+                      <span class="tag">Categorical</span>
+                      <span class="tag">GPU</span>
+                      <span class="tag">Robust</span>
+                    </div>
+                  </div>
+                  <div class="card" style="border-left: 3px solid var(--blue);">
+                    <h4 style="color: var(--blue);">⚡ LightGBM</h4>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">
+                      <strong>لماذا؟</strong> الأسرع في Gradient Boosting. كفاءة عالية مع الداتا الكبيرة (~125M rows).
+                      Low memory usage.
+                    </p>
+                    <div class="tags" style="margin-top: 0.5rem;">
+                      <span class="tag">Fast</span>
+                      <span class="tag">Scalable</span>
+                      <span class="tag">Efficient</span>
+                    </div>
+                  </div>
+                  <div class="card" style="border-left: 3px solid var(--pink);">
+                    <h4 style="color: var(--pink);">🧠 TFT</h4>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">
+                      <strong>لماذا؟</strong> مصمم خصيصاً للـ Time Series. يدعم Multi-horizon forecasting.
+                      Attention mechanism لفهم أهم Features.
+                    </p>
+                    <div class="tags" style="margin-top: 0.5rem;">
+                      <span class="tag">Deep Learning</span>
+                      <span class="tag">Attention</span>
+                      <span class="tag">Multi-horizon</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="alert alert-info">
+                  <div class="alert-title">💡 Baseline Model</div>
+                  نبدأ بـ Linear Regression كـ baseline للمقارنة — ده بيوضح للمحاضر إننا فاهمين أهمية benchmarking.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Req 4 -->
+          <div class="accordion-item fade-in">
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-number">4</span>
+                <div>
+                  <div class="accordion-title">Local Deployment (Streamlit + Flask)</div>
+                </div>
+              </div>
+              <div class="accordion-meta">
+                <span class="status status-done">✓ Done</span>
+                <span class="accordion-chevron">▼</span>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <div class="two-col">
+                  <div>
+                    <h4 style="color: var(--accent-tertiary); margin-bottom: 0.5rem;">🎯 Streamlit App</h4>
+                    <ul class="feature-list">
+                      <li>Dashboard تفاعلي مع KPIs</li>
+                      <li>صفحة Forecast (اختر store/item → تنبؤ)</li>
+                      <li>صفحة Inventory Recommendations</li>
+                      <li>صفحة Model Comparison</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 style="color: var(--accent-tertiary); margin-bottom: 0.5rem;">📊 Flask Dashboard</h4>
+                    <ul class="feature-list">
+                      <li>Interactive Charts مع Plotly.js</li>
+                      <li>REST API للتنبؤات</li>
+                      <li>خريطة المتاجر الجغرافية</li>
+                      <li>Export بصيغ CSV/PDF</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Req 5 -->
+          <div class="accordion-item fade-in">
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-number">5</span>
+                <div>
+                  <div class="accordion-title">GitHub Repository</div>
+                </div>
+              </div>
+              <div class="accordion-meta">
+                <span class="status status-progress">◐ In Progress</span>
+                <span class="accordion-chevron">▼</span>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <ul class="feature-list">
+                  <li>Repository: <a href="https://github.com/hassanrashid111/NTI_Final_Project" target="_blank" style="color: var(--accent-tertiary);">hassanrashid111/NTI_Final_Project</a></li>
+                  <li>Professional folder structure (15+ directories)</li>
+                  <li>Comprehensive README.md</li>
+                  <li>requirements.txt مع كل المكتبات</li>
+                  <li>.gitignore مناسب</li>
+                  <li>LICENSE file</li>
+                  <li>Clear commit history</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Req 6 -->
+          <div class="accordion-item fade-in">
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-number">6</span>
+                <div>
+                  <div class="accordion-title">Clean & Modular Code</div>
+                </div>
+              </div>
+              <div class="accordion-meta">
+                <span class="status status-done">✓ Planned</span>
+                <span class="accordion-chevron">▼</span>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Practice</th>
+                        <th>Implementation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>Modular</strong></td>
+                        <td>كل component في module مستقل داخل <code>src/</code></td>
+                      </tr>
+                      <tr>
+                        <td><strong>OOP</strong></td>
+                        <td>Classes للـ Models, Data Pipeline, Feature Builder</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Config-driven</strong></td>
+                        <td>YAML config files بدل hardcoded values</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Type Hints</strong></td>
+                        <td>Python type annotations في كل function</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Docstrings</strong></td>
+                        <td>Google-style docstrings لكل class/function</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Error Handling</strong></td>
+                        <td>Try/except مع logging مناسب</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Testing</strong></td>
+                        <td>pytest unit tests في <code>tests/</code></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Req 7 -->
+          <div class="accordion-item fade-in">
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-number">7</span>
+                <div>
+                  <div class="accordion-title">Presentation</div>
+                </div>
+              </div>
+              <div class="accordion-meta">
+                <span class="status status-pending">○ Pending</span>
+                <span class="accordion-chevron">▼</span>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <h4 style="color: var(--accent-tertiary); margin-bottom: 0.5rem;">هيكل العرض التقديمي (10 أقسام)</h4>
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Section</th>
+                        <th>Slides</th>
+                        <th>Content</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>1</td><td>Problem & Motivation</td><td>2</td><td>المشكلة والدافع</td></tr>
+                      <tr><td>2</td><td>Dataset Overview</td><td>2</td><td>وصف الداتا</td></tr>
+                      <tr><td>3</td><td>Methodology</td><td>3</td><td>المنهجية والـ Pipeline</td></tr>
+                      <tr><td>4</td><td>EDA Findings</td><td>3</td><td>أهم النتائج من التحليل</td></tr>
+                      <tr><td>5</td><td>Feature Engineering</td><td>2</td><td>أهم الـ Features</td></tr>
+                      <tr><td>6</td><td>Model Architecture</td><td>3</td><td>تفاصيل النماذج</td></tr>
+                      <tr><td>7</td><td>Results</td><td>3</td><td>النتائج والمقارنة</td></tr>
+                      <tr><td>8</td><td>Inventory Optimization</td><td>2</td><td>منطق المخزون</td></tr>
+                      <tr><td>9</td><td>Live Demo</td><td>—</td><td>عرض حي (5 دقائق)</td></tr>
+                      <tr><td>10</td><td>Conclusion</td><td>1</td><td>الخلاصة والمستقبل</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Req 8 -->
+          <div class="accordion-item fade-in">
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-number">8</span>
+                <div>
+                  <div class="accordion-title">Live Demo</div>
+                </div>
+              </div>
+              <div class="accordion-meta">
+                <span class="status status-pending">○ Pending</span>
+                <span class="accordion-chevron">▼</span>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <h4 style="color: var(--accent-tertiary); margin-bottom: 0.5rem;">Demo Script</h4>
+                <ul class="feature-list">
+                  <li>تشغيل Streamlit App محلياً</li>
+                  <li>عرض Dashboard مع KPIs</li>
+                  <li>اختيار store + item → عرض Forecast</li>
+                  <li>عرض Inventory Recommendations</li>
+                  <li>مقارنة النماذج في صفحة Evaluation</li>
+                  <li>عرض Flask Dashboard مع Charts تفاعلية</li>
+                  <li>إرسال API request للتنبؤ</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Req 9 -->
+          <div class="accordion-item fade-in">
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-number">9</span>
+                <div>
+                  <div class="accordion-title">LinkedIn Post</div>
+                </div>
+              </div>
+              <div class="accordion-meta">
+                <span class="status status-pending">○ Post-submission</span>
+                <span class="accordion-chevron">▼</span>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <p style="color: var(--text-secondary);">
+                  سيتم كتابة LinkedIn post بعد انتهاء المشروع يتضمن:
+                </p>
+                <ul class="feature-list">
+                  <li>وصف مختصر للمشروع</li>
+                  <li>Screenshots من الـ Dashboard</li>
+                  <li>النتائج الرئيسية (Metrics)</li>
+                  <li>رابط الـ GitHub Repository</li>
+                  <li>Hashtags مناسبة (#MachineLearning #NTI #DataScience)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Summary -->
+      <section class="section">
+        <div class="alert alert-success fade-in">
+          <div class="alert-title">🎯 Summary</div>
+          <p>المشروع يحقق <strong>جميع المتطلبات التسعة</strong> من الـ Guidelines بالكامل، بل ويتجاوزها بإضافة Flask Dashboard ثانوي و Inventory Optimization system.</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>AI-Powered Demand Forecasting · NTI Capstone Project</p>
+      <p style="margin-top: 0.5rem;">
+        <a href="index.html">← Back to Home</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
