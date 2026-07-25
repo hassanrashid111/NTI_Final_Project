@@ -40,6 +40,7 @@ PROJECT_ROOT = Path(__file__).parent
 # Data directories
 DATA_DIR         = PROJECT_ROOT / "01_Dataset"
 RAW_DATA_DIR     = DATA_DIR / "raw"
+PARQUET_DATA_DIR = DATA_DIR / "parquet"
 PROCESSED_DIR    = DATA_DIR / "processed"
 FEATURES_DIR     = DATA_DIR / "features"
 PREDICTIONS_DIR  = DATA_DIR / "predictions"
@@ -53,9 +54,9 @@ PRESENTATION_DIR = PROJECT_ROOT / "06_Presentation"
 
 
 # ==============================================================
-# 2. RAW DATASET FILES
+# 2. RAW & PARQUET DATASET FILES
 # ==============================================================
-# Corporación Favorita Grocery Sales Forecasting — Kaggle
+# Raw CSV files
 TRAIN_FILE        = RAW_DATA_DIR / "train.csv"
 TEST_FILE         = RAW_DATA_DIR / "test.csv"
 STORES_FILE       = RAW_DATA_DIR / "stores.csv"
@@ -64,9 +65,18 @@ OIL_FILE          = RAW_DATA_DIR / "oil.csv"
 TRANSACTIONS_FILE = RAW_DATA_DIR / "transactions.csv"
 HOLIDAYS_FILE     = RAW_DATA_DIR / "holidays_events.csv"
 
+# Optimized Parquet files (Binary, compressed, typed, fast loading)
+TRAIN_PARQUET        = PARQUET_DATA_DIR / "train.parquet"
+TEST_PARQUET         = PARQUET_DATA_DIR / "test.parquet"
+STORES_PARQUET       = PARQUET_DATA_DIR / "stores.parquet"
+ITEMS_PARQUET        = PARQUET_DATA_DIR / "items.parquet"
+OIL_PARQUET          = PARQUET_DATA_DIR / "oil.parquet"
+TRANSACTIONS_PARQUET = PARQUET_DATA_DIR / "transactions.parquet"
+HOLIDAYS_PARQUET     = PARQUET_DATA_DIR / "holidays_events.parquet"
+
 
 # ==============================================================
-# 3. PROCESSED DATA FILES
+# 3. PROCESSED & FEATURE DATA FILES
 # ==============================================================
 CLEAN_DATA_FILE   = PROCESSED_DIR / "clean_data.parquet"
 MERGED_DATA_FILE  = PROCESSED_DIR / "merged_data.parquet"

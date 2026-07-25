@@ -22,11 +22,14 @@ pytorch-lightning
 streamlit
 flask
 
-# Data Format
+# Data Formats & Serialization
 pyarrow
+fastparquet
 openpyxl
 
-# Utilities
+# Kaggle & Utilities
+kaggle
+py7zr
 pyyaml
 tqdm
 joblib

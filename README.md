@@ -17,9 +17,10 @@ Predict grocery product demand at **Corporación Favorita** (Ecuador) and provid
 ```
 ├── 01_Dataset/
 │   ├── raw/                → Original CSV files from Kaggle
-│   ├── processed/          → Cleaned & merged data
-│   ├── features/           → Engineered features
-│   └── predictions/        → Final model predictions
+│   ├── parquet/            → Binary Parquet files (5-10x fast loading)
+│   ├── processed/          → Cleaned & merged data (clean_data.parquet)
+│   ├── features/           → Feature store (feature_store.parquet)
+│   └── predictions/        → Final model predictions & inventory recommendations
 │
 ├── 02_Notebooks/
 │   ├── 00_dataset_setup
@@ -40,32 +41,30 @@ Predict grocery product demand at **Corporación Favorita** (Ecuador) and provid
 │   ├── backend/            → Flask REST API endpoints
 │   └── streamlit/          → Streamlit ML Forecasting App
 │
-├── 05_Docs/                → Documentation & interactive HTML plan
+├── 05_Docs/                → Project documentation
 ├── 06_Presentation/        → Presentation slides & demo script
 │
 ├── config.py               → Central project paths & global settings
-├── utils.py                → Shared helper functions (data loading, metrics, saving)
+├── utils.py                → Shared helper functions (Parquet conversion, data loading, metrics, saving)
 ├── requirements.txt        → Python dependencies
 └── README.md
 ```
 
 ---
 
-## Notebook Pipeline
+## Data & Notebook Pipeline
 
 ```
-00 Setup → 01 Understand → 02 EDA → 03 Clean → 04 Features
-                                                     ↓
-09 Experiments ← 08 Inference ← 07 Evaluate ← 06 Train ← 05 Baseline
+Raw CSV (Kaggle) ──► Convert to Parquet ──► Understand & EDA ──► Preprocess ──► Feature Store ──► Model Training ──► Inference
 ```
 
 | # | Notebook | Reads From | Writes To | Description |
 |---|----------|------------|-----------|-------------|
-| 00 | Dataset Setup | Kaggle | `raw/` | Download & verify dataset |
-| 01 | Data Understanding | `raw/` | — | Inspect schema & data quality |
-| 02 | EDA | `raw/` | — | Exploratory data analysis & trends |
-| 03 | Preprocessing | `raw/` | `processed/` | Handle missing values & merge datasets |
-| 04 | Feature Engineering | `processed/` | `features/` | Generate time-series features |
+| 00 | Dataset Setup | Kaggle | `raw/`, `parquet/` | Download, verify CSVs, & convert to Parquet |
+| 01 | Data Understanding | `parquet/` | — | Inspect schemas & data types |
+| 02 | EDA | `parquet/` | — | Exploratory data analysis & trends |
+| 03 | Preprocessing | `parquet/` | `processed/` | Handle missing values & merge datasets |
+| 04 | Feature Engineering | `processed/` | `features/` | Generate time-series lag/rolling features |
 | 05 | Baseline Models | `features/` | `03_Models/` | Establish benchmark (Linear Regression/RF) |
 | 06 | Model Training | `features/` | `03_Models/` | Train CatBoost, LightGBM, and TFT |
 | 07 | Model Evaluation | `03_Models/` | — | Compare models & select best performer |
@@ -78,10 +77,10 @@ Predict grocery product demand at **Corporación Favorita** (Ecuador) and provid
 
 | Category | Tools |
 |----------|-------|
-| Data | Pandas, NumPy, Polars |
+| Data Format | Parquet (PyArrow / FastParquet), Pandas, NumPy |
 | Visualization | Matplotlib, Seaborn, Plotly |
 | Machine Learning | Scikit-learn, CatBoost, LightGBM |
-| Deep Learning | PyTorch (Future Work) |
+| Deep Learning | PyTorch, PyTorch Forecasting, PyTorch Lightning |
 | Web Application | Streamlit (ML App), Flask (Backend + BI Frontend) |
 
 ---
@@ -104,15 +103,8 @@ pip install -r requirements.txt
 | Model | Type | Role |
 |-------|------|------|
 | Linear Regression / Random Forest | Baseline | Performance benchmark |
-| CatBoost | Gradient Boosting | Categorical features optimization |
-| LightGBM | Gradient Boosting | Fast training & memory efficiency |
+| CatBoost | Gradient Boosting | Native categorical feature support |
+| LightGBM | Gradient Boosting | Fast training & low memory footprint |
 | TFT | Deep Learning | Multi-horizon time series forecasting |
 
 **Metrics:** RMSE · MAE · MAPE · RMSLE
-
-## Future Work
-
-- Hyperparameter Optimization
-- Model Ensemble
-- Dashboard Deployment
-- API Integration

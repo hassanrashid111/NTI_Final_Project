@@ -9,10 +9,12 @@ __pycache__/
 # Data (too large for GitHub)
 01_Dataset/raw/*.csv
 01_Dataset/raw/*.zip
+01_Dataset/parquet/*.parquet
 01_Dataset/processed/*.parquet
 01_Dataset/features/*.parquet
 01_Dataset/predictions/*.csv
 *.zip
+*.7z
 
 # Models (too large for GitHub)
 03_Models/*.pkl
