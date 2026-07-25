@@ -72,9 +72,10 @@ def convert_csv_to_parquet(
         conn.close()
     else:
         # Fallback using pandas pyarrow engine
-        df = pd.read_csv(csv_path)
-        df.to_parquet(parquet_path, index=False, engine="pyarrow")
-        num_rows, num_cols = df.shape
+        raise ImportError(
+    "DuckDB is required for converting the raw dataset.\n"
+    "Please install duckdb first."
+)
 
     elapsed_time = time.time() - start_time
     csv_bytes = csv_path.stat().st_size
