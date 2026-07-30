@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timeline & Roadmap — AI Demand Forecasting</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand"><span class="icon">🚀</span><span>AI Demand Forecasting</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="requirements.html">Requirements</a></li>
+      <li><a href="phases.html">Phases</a></li>
+      <li><a href="dataset.html">Dataset</a></li>
+      <li><a href="architecture.html">Architecture</a></li>
+      <li><a href="timeline.html" class="active">Timeline</a></li>
+      <li><a href="colab.html">Colab Guide</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+
+      <section class="page-hero">
+        <div class="badge fade-in">📅 Project Timeline</div>
+        <h1 class="fade-in stagger-1">Timeline & Roadmap</h1>
+        <p class="subtitle fade-in stagger-2">
+          الجدول الزمني للمشروع على مدار 4 أسابيع<br>
+          مع الـ Milestones والـ Checkpoints لكل أسبوع
+        </p>
+      </section>
+
+      <!-- Summary Stats -->
+      <section class="section">
+        <div class="stats-grid">
+          <div class="stat-card fade-in stagger-1">
+            <div class="stat-value" data-count="4">0</div>
+            <div class="stat-label">Weeks</div>
+          </div>
+          <div class="stat-card fade-in stagger-2">
+            <div class="stat-value" data-count="20">0</div>
+            <div class="stat-label">Working Days</div>
+          </div>
+          <div class="stat-card fade-in stagger-3">
+            <div class="stat-value" data-count="13">0</div>
+            <div class="stat-label">Phases</div>
+          </div>
+          <div class="stat-card fade-in stagger-4">
+            <div class="stat-value" data-count="4">0</div>
+            <div class="stat-label">Milestones</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timeline -->
+      <section class="section">
+        <div class="section-header fade-in">
+          <h2><span class="icon">🗓️</span> Weekly Breakdown</h2>
+        </div>
+
+        <div class="timeline">
+
+          <!-- Week 1 -->
+          <div class="timeline-item fade-in">
+            <div class="timeline-week">WEEK 1 — Foundation</div>
+            <div class="timeline-title">Business Understanding · Planning · Dataset</div>
+            <div class="table-wrapper" style="margin-top: 1rem;">
+              <table>
+                <thead><tr><th>Day</th><th>Phase</th><th>Tasks</th><th>Deliverable</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Day 1</strong></td>
+                    <td>Business + Planning</td>
+                    <td>Problem Statement, KPIs, Setup Repo</td>
+                    <td>Project Plan, README</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 2</strong></td>
+                    <td>Dataset</td>
+                    <td>Download data, Data Dictionary, ERD</td>
+                    <td>Dataset Report</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 3-4</strong></td>
+                    <td>EDA</td>
+                    <td>Sales analysis, trends, correlations, outliers</td>
+                    <td>EDA Report + Figures</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 5</strong></td>
+                    <td>Cleaning</td>
+                    <td>Missing values, duplicates, merge data</td>
+                    <td>Clean Dataset</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="alert alert-success" style="margin-top: 1rem;">
+              <div class="alert-title">🏁 Milestone 1</div>
+              Clean dataset جاهز + EDA report مكتمل + GitHub repo منظم
+            </div>
+          </div>
+
+          <!-- Week 2 -->
+          <div class="timeline-item fade-in">
+            <div class="timeline-week">WEEK 2 — Features & First Models</div>
+            <div class="timeline-title">Feature Engineering · Baseline · CatBoost · LightGBM</div>
+            <div class="table-wrapper" style="margin-top: 1rem;">
+              <table>
+                <thead><tr><th>Day</th><th>Phase</th><th>Tasks</th><th>Deliverable</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Day 6-7</strong></td>
+                    <td>Feature Engineering</td>
+                    <td>50+ features (date, lag, rolling, external)</td>
+                    <td>Feature Store</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 8</strong></td>
+                    <td>Baseline</td>
+                    <td>Linear Regression + Random Forest</td>
+                    <td>Baseline Report</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 9</strong></td>
+                    <td>CatBoost</td>
+                    <td>Train, tune, evaluate CatBoost</td>
+                    <td>CatBoost Model</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 10</strong></td>
+                    <td>LightGBM</td>
+                    <td>Train, tune, evaluate LightGBM</td>
+                    <td>LightGBM Model</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="alert alert-success" style="margin-top: 1rem;">
+              <div class="alert-title">🏁 Milestone 2</div>
+              Feature store جاهز + 3 models مدربة (Baseline + CatBoost + LightGBM)
+            </div>
+          </div>
+
+          <!-- Week 3 -->
+          <div class="timeline-item fade-in">
+            <div class="timeline-week">WEEK 3 — Advanced & Optimization</div>
+            <div class="timeline-title">TFT · Evaluation · Inventory Optimization · Start Deployment</div>
+            <div class="table-wrapper" style="margin-top: 1rem;">
+              <table>
+                <thead><tr><th>Day</th><th>Phase</th><th>Tasks</th><th>Deliverable</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Day 11</strong></td>
+                    <td>TFT</td>
+                    <td>Train Temporal Fusion Transformer (GPU)</td>
+                    <td>TFT Model</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 12</strong></td>
+                    <td>Evaluation</td>
+                    <td>Compare all models, select best</td>
+                    <td>Evaluation Report</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 13</strong></td>
+                    <td>Inventory</td>
+                    <td>Build restock logic, alerts system</td>
+                    <td>Inventory Optimizer</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 14-15</strong></td>
+                    <td>Streamlit</td>
+                    <td>Build all 4 pages of Streamlit app</td>
+                    <td>Working Streamlit App</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="alert alert-success" style="margin-top: 1rem;">
+              <div class="alert-title">🏁 Milestone 3</div>
+              All models evaluated + Inventory logic ready + Streamlit app working
+            </div>
+          </div>
+
+          <!-- Week 4 -->
+          <div class="timeline-item fade-in">
+            <div class="timeline-week">WEEK 4 — Deploy, Document, Present</div>
+            <div class="timeline-title">Flask · Documentation · Presentation · Final Submission</div>
+            <div class="table-wrapper" style="margin-top: 1rem;">
+              <table>
+                <thead><tr><th>Day</th><th>Phase</th><th>Tasks</th><th>Deliverable</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Day 16</strong></td>
+                    <td>Flask Dashboard</td>
+                    <td>Build BI dashboard with REST API</td>
+                    <td>Flask App</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 17</strong></td>
+                    <td>Documentation</td>
+                    <td>README, reports, user guide</td>
+                    <td>Complete Docs</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 18</strong></td>
+                    <td>Presentation</td>
+                    <td>PowerPoint, demo script, Q&A prep</td>
+                    <td>Presentation</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 19</strong></td>
+                    <td>Testing & Polish</td>
+                    <td>End-to-end testing, bug fixes, UI polish</td>
+                    <td>Stable Build</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Day 20</strong></td>
+                    <td>Final Delivery</td>
+                    <td>GitHub push, demo rehearsal, submission</td>
+                    <td>🎉 Project Complete!</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="alert alert-success" style="margin-top: 1rem;">
+              <div class="alert-title">🏁 Milestone 4 (FINAL)</div>
+              🎉 كل شيء جاهز: GitHub + Streamlit + Flask + Docs + Presentation + Demo
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Milestones Summary -->
+      <section class="section">
+        <div class="section-header fade-in">
+          <h2><span class="icon">🏁</span> Milestones Summary</h2>
+        </div>
+
+        <div class="card-grid fade-in">
+          <div class="card" style="border-left: 3px solid var(--green);">
+            <div class="card-icon green">M1</div>
+            <h3>End of Week 1</h3>
+            <p>Clean data + EDA report</p>
+            <div class="progress-container" style="margin-top: 1rem;">
+              <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+            </div>
+          </div>
+          <div class="card" style="border-left: 3px solid var(--blue);">
+            <div class="card-icon blue">M2</div>
+            <h3>End of Week 2</h3>
+            <p>Features + 3 trained models</p>
+            <div class="progress-container" style="margin-top: 1rem;">
+              <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+            </div>
+          </div>
+          <div class="card" style="border-left: 3px solid var(--orange);">
+            <div class="card-icon orange">M3</div>
+            <h3>End of Week 3</h3>
+            <p>All models + Streamlit app</p>
+            <div class="progress-container" style="margin-top: 1rem;">
+              <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+            </div>
+          </div>
+          <div class="card" style="border-left: 3px solid var(--pink);">
+            <div class="card-icon pink">M4</div>
+            <h3>End of Week 4</h3>
+            <p>🎉 Full project delivered</p>
+            <div class="progress-container" style="margin-top: 1rem;">
+              <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Checklist -->
+      <section class="section">
+        <div class="section-header fade-in">
+          <h2><span class="icon">✅</span> Master Checklist</h2>
+        </div>
+
+        <div class="card fade-in">
+          <ul class="checklist">
+            <li><span class="check-icon done">✓</span> <strong>Phase 0</strong> — Business Understanding</li>
+            <li><span class="check-icon done">✓</span> <strong>Phase 1</strong> — Project Planning & Setup</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 2</strong> — Dataset Understanding</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 3</strong> — Exploratory Data Analysis (EDA)</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 4</strong> — Data Cleaning & Preprocessing</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 5</strong> — Feature Engineering</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 6</strong> — Baseline Models</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 7A</strong> — CatBoost</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 7B</strong> — LightGBM</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 7C</strong> — Temporal Fusion Transformer (TFT)</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 8</strong> — Model Evaluation & Comparison</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 9</strong> — Inventory Optimization</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 10A</strong> — Streamlit App</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 10B</strong> — Flask BI Dashboard</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 11</strong> — Documentation</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 12</strong> — Presentation & Demo</li>
+            <li><span class="check-icon pending">○</span> <strong>Phase 13</strong> — Final Submission</li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>AI-Powered Demand Forecasting · NTI Capstone Project</p>
+      <p style="margin-top: 0.5rem;"><a href="index.html">← Back to Home</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
