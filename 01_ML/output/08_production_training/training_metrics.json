@@ -1,0 +1,16 @@
+{
+  "RMSLE": 0.023159,
+  "RMSE": 2.3189,
+  "MAE": 0.2366,
+  "MAPE_pct": 1.34,
+  "R2_Score": 0.974656,
+  "Training_Time_s": 6957.2,
+  "Prediction_Time_s": 117.0,
+  "Total_Trees": 3512,
+  "Chunks_Processed": 9,
+  "Train_Rows": 120231795,
+  "Val_Rows": 1570968,
+  "Num_Features": 47,
+  "Device": "GPU ✅",
+  "GPU_Name": "NVIDIA GeForce RTX 4050 Laptop GPU"
+}

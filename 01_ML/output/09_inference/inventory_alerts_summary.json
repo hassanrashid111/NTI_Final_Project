@@ -1,0 +1,12 @@
+{
+  "generated_at": "2026-07-30T02:00:47.140192",
+  "total_sku_pairs": 146247,
+  "total_16d_forecast_units": 12075813.42,
+  "total_recommended_reorder_units": 9593179,
+  "alert_breakdown": {
+    "CRITICAL_UNDERSTOCK": 110284,
+    "OPTIMAL_STOCK": 35963
+  },
+  "lead_time_days": 7,
+  "service_level_target": "95%"
+}

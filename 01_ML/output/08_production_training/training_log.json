@@ -1,0 +1,200 @@
+{
+  "params": {
+    "objective": "regression",
+    "metric": "rmse",
+    "boosting_type": "gbdt",
+    "num_leaves": 127,
+    "learning_rate": 0.03,
+    "subsample": 0.7,
+    "colsample_bytree": 0.7,
+    "min_child_samples": 100,
+    "seed": 42,
+    "verbose": -1,
+    "device": "gpu",
+    "gpu_platform_id": 0,
+    "gpu_device_id": 0
+  },
+  "total_trees": 3512,
+  "device": "GPU ✅",
+  "gpu_name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "chunks": [
+    {
+      "Chunk_ID": 1,
+      "Date_Range": "2013-01-01 → 2013-06-30",
+      "Row_Count": 3999156,
+      "Load_Time_s": 19.65,
+      "Fit_Time_s": 64.01,
+      "Total_Chunk_Time_s": 86.57,
+      "RAM_Usage_GB": 2.57,
+      "Total_Trees": 500,
+      "Val_RMSE": 0.035975
+    },
+    {
+      "Chunk_ID": 2,
+      "Date_Range": "2013-07-01 → 2013-12-31",
+      "Row_Count": 8629229,
+      "Load_Time_s": 25.8,
+      "Fit_Time_s": 166.51,
+      "Total_Chunk_Time_s": 200.01,
+      "RAM_Usage_GB": 2.18,
+      "Total_Trees": 999,
+      "Val_RMSE": 0.033938
+    },
+    {
+      "Chunk_ID": 3,
+      "Date_Range": "2014-01-01 → 2014-06-30",
+      "Row_Count": 9904527,
+      "Load_Time_s": 32.25,
+      "Fit_Time_s": 269.22,
+      "Total_Chunk_Time_s": 310.19,
+      "RAM_Usage_GB": 1.49,
+      "Total_Trees": 1494,
+      "Val_RMSE": 0.030621
+    },
+    {
+      "Chunk_ID": 4,
+      "Date_Range": "2014-07-01 → 2014-12-31",
+      "Row_Count": 12367075,
+      "Load_Time_s": 35.39,
+      "Fit_Time_s": 498.02,
+      "Total_Chunk_Time_s": 546.91,
+      "RAM_Usage_GB": 1.58,
+      "Total_Trees": 1993,
+      "Val_RMSE": 0.026258
+    },
+    {
+      "Chunk_ID": 5,
+      "Date_Range": "2015-01-01 → 2015-06-30",
+      "Row_Count": 11681661,
+      "Load_Time_s": 34.15,
+      "Fit_Time_s": 562.8,
+      "Total_Chunk_Time_s": 605.24,
+      "RAM_Usage_GB": 1.62,
+      "Total_Trees": 2493,
+      "Val_RMSE": 0.025386
+    },
+    {
+      "Chunk_ID": 6,
+      "Date_Range": "2015-07-01 → 2015-12-31",
+      "Row_Count": 16182983,
+      "Load_Time_s": 39.32,
+      "Fit_Time_s": 941.71,
+      "Total_Chunk_Time_s": 997.07,
+      "RAM_Usage_GB": 1.87,
+      "Total_Trees": 2976,
+      "Val_RMSE": 0.024301
+    },
+    {
+      "Chunk_ID": 7,
+      "Date_Range": "2016-01-01 → 2016-06-30",
+      "Row_Count": 17198423,
+      "Load_Time_s": 40.08,
+      "Fit_Time_s": 1165.42,
+      "Total_Chunk_Time_s": 1223.19,
+      "RAM_Usage_GB": 1.95,
+      "Total_Trees": 2999,
+      "Val_RMSE": 0.024268
+    },
+    {
+      "Chunk_ID": 8,
+      "Date_Range": "2016-07-01 → 2016-12-31",
+      "Row_Count": 18031448,
+      "Load_Time_s": 41.58,
+      "Fit_Time_s": 1238.39,
+      "Total_Chunk_Time_s": 1298.78,
+      "RAM_Usage_GB": 2.03,
+      "Total_Trees": 3013,
+      "Val_RMSE": 0.024132
+    },
+    {
+      "Chunk_ID": 9,
+      "Date_Range": "2017-01-01 → 2017-07-31",
+      "Row_Count": 22237293,
+      "Load_Time_s": 41.94,
+      "Fit_Time_s": 1614.31,
+      "Total_Chunk_Time_s": 1687.13,
+      "RAM_Usage_GB": 2.34,
+      "Total_Trees": 3512,
+      "Val_RMSE": 0.023161
+    }
+  ],
+  "ram_log": [
+    {
+      "step": "Pipeline Start",
+      "ram_gb": 0.332,
+      "timestamp": "2026-07-29T23:46:13.573953"
+    },
+    {
+      "step": "After Metadata Scan",
+      "ram_gb": 0.341,
+      "timestamp": "2026-07-29T23:46:43.890777"
+    },
+    {
+      "step": "After Split Computation",
+      "ram_gb": 0.371,
+      "timestamp": "2026-07-29T23:46:55.158908"
+    },
+    {
+      "step": "After Validation Load",
+      "ram_gb": 2.185,
+      "timestamp": "2026-07-29T23:47:32.415371"
+    },
+    {
+      "step": "After Chunk Planning",
+      "ram_gb": 2.197,
+      "timestamp": "2026-07-29T23:47:33.971799"
+    },
+    {
+      "step": "Chunk 1 Done",
+      "ram_gb": 2.569,
+      "timestamp": "2026-07-29T23:49:11.375760"
+    },
+    {
+      "step": "Chunk 2 Done",
+      "ram_gb": 2.185,
+      "timestamp": "2026-07-29T23:52:31.581266"
+    },
+    {
+      "step": "Chunk 3 Done",
+      "ram_gb": 1.487,
+      "timestamp": "2026-07-29T23:57:41.969114"
+    },
+    {
+      "step": "Chunk 4 Done",
+      "ram_gb": 1.576,
+      "timestamp": "2026-07-30T00:06:49.095524"
+    },
+    {
+      "step": "Chunk 5 Done",
+      "ram_gb": 1.624,
+      "timestamp": "2026-07-30T00:16:54.553693"
+    },
+    {
+      "step": "Chunk 6 Done",
+      "ram_gb": 1.869,
+      "timestamp": "2026-07-30T00:33:31.905518"
+    },
+    {
+      "step": "Chunk 7 Done",
+      "ram_gb": 1.949,
+      "timestamp": "2026-07-30T00:53:55.369958"
+    },
+    {
+      "step": "Chunk 8 Done",
+      "ram_gb": 2.03,
+      "timestamp": "2026-07-30T01:15:34.444856"
+    },
+    {
+      "step": "Chunk 9 Done",
+      "ram_gb": 2.337,
+      "timestamp": "2026-07-30T01:43:41.905368"
+    },
+    {
+      "step": "After Evaluation",
+      "ram_gb": 2.383,
+      "timestamp": "2026-07-30T01:46:10.644883"
+    }
+  ],
+  "pipeline_start": "2026-07-29T23:46:13.573953",
+  "training_time_s": 6957.2
+}
