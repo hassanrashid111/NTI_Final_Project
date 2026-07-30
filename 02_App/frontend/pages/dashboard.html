@@ -1,0 +1,196 @@
+<!-- Executive Dashboard Page — Ultra Premium SaaS Design -->
+<div class="p-8 space-y-8 relative">
+  <!-- Background Glow Halos -->
+  <div class="absolute top-10 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute top-1/3 right-10 w-96 h-96 bg-sky-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+  <!-- Section Header -->
+  <div class="section-header animate-fadein">
+    <div class="header-icon header-icon-emerald shadow-lg shadow-emerald-950/40">
+      <i data-lucide="layout-dashboard" class="w-6 h-6"></i>
+    </div>
+    <div>
+      <h2>Executive Intelligence Dashboard</h2>
+      <p>Network-wide 16-day sales forecasting & inventory health oversight across 54 retail stores.</p>
+    </div>
+    <div class="ml-auto flex items-center gap-3">
+      <span class="px-3 py-1.5 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-2 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        Live Production Telemetry
+      </span>
+    </div>
+  </div>
+
+  <!-- Info Box -->
+  <div class="info-box animate-fadein-d1 shadow-sm">
+    <i data-lucide="info" class="w-4 h-4 text-sky-400 flex-shrink-0 mt-0.5"></i>
+    <span><strong>Dashboard Overview</strong> — Real-time telemetry powered by Champion LightGBM GPU model. All metrics update dynamically for 54 stores & 4,000+ SKUs across Ecuador's network.</span>
+  </div>
+
+  <!-- KPI Cards Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <div class="glass-card kpi-card kpi-card-sky animate-fadein-d1 group">
+      <div class="flex items-center justify-between">
+        <p class="kpi-label"><i data-lucide="trending-up" class="w-3.5 h-3.5 text-sky-400"></i> 16-Day Forecast Demand</p>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20">+14.2%</span>
+      </div>
+      <h3 id="kpi-forecast-16d" class="kpi-value">0 units</h3>
+      <p class="kpi-sub">Across 54 Stores & 4,000+ SKUs</p>
+      <!-- Sparkline Canvas -->
+      <div class="h-8 mt-3 w-full opacity-60 group-hover:opacity-100 transition-opacity">
+        <canvas id="kpi-sparkline-1"></canvas>
+      </div>
+    </div>
+
+    <div class="glass-card kpi-card kpi-card-emerald animate-fadein-d2 group">
+      <div class="flex items-center justify-between">
+        <p class="kpi-label"><i data-lucide="package" class="w-3.5 h-3.5 text-emerald-400"></i> Recommended Reorder</p>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">ROQ Queue</span>
+      </div>
+      <h3 id="kpi-reorder-qty" class="kpi-value">0 units</h3>
+      <p class="kpi-sub">Operations Research ROQ Quantity</p>
+      <div class="h-8 mt-3 w-full opacity-60 group-hover:opacity-100 transition-opacity">
+        <canvas id="kpi-sparkline-2"></canvas>
+      </div>
+    </div>
+
+    <div class="glass-card kpi-card kpi-card-rose animate-fadein-d3 group">
+      <div class="flex items-center justify-between">
+        <p class="kpi-label"><i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-rose-400"></i> Critical Understock Alerts</p>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/20 animate-pulse">P1 Urgent</span>
+      </div>
+      <h3 id="kpi-critical-skus" class="kpi-value" style="color: #fda4af !important">0 SKUs</h3>
+      <p class="kpi-sub">Stock &lt; ROP (Immediate PO Needed)</p>
+      <div class="h-8 mt-3 w-full opacity-60 group-hover:opacity-100 transition-opacity">
+        <canvas id="kpi-sparkline-3"></canvas>
+      </div>
+    </div>
+
+    <div class="glass-card kpi-card kpi-card-amber animate-fadein-d4 group">
+      <div class="flex items-center justify-between">
+        <p class="kpi-label"><i data-lucide="target" class="w-3.5 h-3.5 text-amber-400"></i> Champion Model Accuracy</p>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">RMSLE 0.0298</span>
+      </div>
+      <h3 id="kpi-model-rmsle" class="kpi-value" style="color: #fcd34d !important">0.0000</h3>
+      <p class="kpi-sub">Validation RMSLE (LightGBM GPU)</p>
+      <div class="h-8 mt-3 w-full opacity-60 group-hover:opacity-100 transition-opacity">
+        <canvas id="kpi-sparkline-4"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row 1: Main Demand Trajectory + Donut Health -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="glass-card p-6 lg:col-span-2 chart-container animate-fadein-d3">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-base font-semibold text-white flex items-center gap-2">
+          <i data-lucide="activity" class="w-4 h-4 text-sky-400"></i>
+          16-Day Forecast vs. Actual Sales Trajectory
+        </h3>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="flex items-center gap-1.5 text-sky-400"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Forecast</span>
+          <span class="flex items-center gap-1.5 text-emerald-400"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Actual</span>
+        </div>
+      </div>
+      <div class="h-72 w-full">
+        <canvas id="dashboard-trajectory-chart"></canvas>
+      </div>
+    </div>
+
+    <div class="glass-card p-6 chart-container animate-fadein-d4">
+      <h3 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
+        <i data-lucide="shield" class="w-4 h-4 text-emerald-400"></i>
+        Inventory Health Breakdown
+      </h3>
+      <div class="h-64 w-full relative">
+        <canvas id="dashboard-alert-donut"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row 2: Top Categories Bar + Radar Profile Chart -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="glass-card p-6 chart-container animate-fadein-d5">
+      <h3 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
+        <i data-lucide="bar-chart-3" class="w-4 h-4 text-amber-400"></i>
+        Top Categories by Forecast Demand Volume
+      </h3>
+      <div class="h-72 w-full">
+        <canvas id="dashboard-category-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- NEW CHART: Category Radar Performance Profile -->
+    <div class="glass-card p-6 chart-container animate-fadein-d5">
+      <h3 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
+        <i data-lucide="compass" class="w-4 h-4 text-violet-400"></i>
+        Category Demand & Risk Radar Profile
+      </h3>
+      <div class="h-72 w-full">
+        <canvas id="dashboard-radar-chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row 3: Scatter Alert Map + Live Activity Log -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- NEW CHART: Stock vs ROP Scatter Alert Map -->
+    <div class="glass-card p-6 lg:col-span-2 chart-container animate-fadein-d6">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-base font-semibold text-white flex items-center gap-2">
+          <i data-lucide="scatter-chart" class="w-4 h-4 text-cyan-400"></i>
+          SKU Inventory Level vs. Reorder Point (Alert Distribution Map)
+        </h3>
+        <span class="text-xs text-zinc-500">100 Sample SKUs</span>
+      </div>
+      <div class="h-72 w-full">
+        <canvas id="dashboard-scatter-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Live Activity Telemetry Feed -->
+    <div class="glass-card p-6 flex flex-col justify-between animate-fadein-d6">
+      <div>
+        <h3 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
+          <i data-lucide="radio" class="w-4 h-4 text-rose-400 animate-pulse"></i>
+          Live Activity Feed & Automated POs
+        </h3>
+        <div class="space-y-3 text-xs">
+          <div class="p-3 rounded-lg bg-zinc-900/60 border border-zinc-800 flex items-start gap-3">
+            <div class="w-2 h-2 rounded-full bg-rose-500 mt-1.5 animate-ping"></div>
+            <div>
+              <p class="font-semibold text-white">Auto PO #8492 Generated</p>
+              <p class="text-zinc-400 text-[11px]">Store #12 · SKU-492102 · 1,420 units</p>
+              <p class="text-[10px] text-zinc-500 mt-1">2 mins ago</p>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-lg bg-zinc-900/60 border border-zinc-800 flex items-start gap-3">
+            <div class="w-2 h-2 rounded-full bg-emerald-500 mt-1.5"></div>
+            <div>
+              <p class="font-semibold text-white">Inference Engine Re-indexed</p>
+              <p class="text-zinc-400 text-[11px]">16-Day predictions updated (RTX 4050)</p>
+              <p class="text-[10px] text-zinc-500 mt-1">12 mins ago</p>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-lg bg-zinc-900/60 border border-zinc-800 flex items-start gap-3">
+            <div class="w-2 h-2 rounded-full bg-amber-500 mt-1.5"></div>
+            <div>
+              <p class="font-semibold text-white">Service Level Target Adjusted</p>
+              <p class="text-zinc-400 text-[11px]">Z = 1.65 (95% Cycle Service)</p>
+              <p class="text-[10px] text-zinc-500 mt-1">34 mins ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 pt-4 border-t border-zinc-800 text-center">
+        <a href="#alerts" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center justify-center gap-1.5 transition-colors">
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          View Risk Priority Queue
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
