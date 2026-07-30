@@ -2,8 +2,6 @@
 > **AI-Powered 16-Day Sales Forecasting (LightGBM GPU) & Operations Research Supply Chain Inventory Optimization**
 
 
-
-
 ![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![LightGBM GPU](https://img.shields.io/badge/LightGBM-GPU%20CUDA-green?style=for-the-badge&logo=nvidia&logoColor=white)
