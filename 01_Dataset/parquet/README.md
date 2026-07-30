@@ -1,2 +1,0 @@
-# Parquet Data
-
