@@ -1,9 +1,0 @@
-Rank,Model,RMSLE,RMSE,MAE,MAPE,R2_Score
-1,Random Forest,0.2873,6.28,2.1,22.37,0.836
-2,Ridge Regression,0.6203,496.96,12.56,62.64,-1027.0338
-3,ElasticNet,0.6257,222.89,10.68,61.61,-205.8038
-4,Lasso Regression,0.6268,216.73,10.5,61.16,-194.5248
-5,Seasonal Naive (t-7),0.7316,10.22,4.51,71.26,0.5656
-6,Global Median,0.8756,16.0,6.12,55.7,-0.0658
-7,Global Mean,1.0071,15.5,7.38,118.68,-0.0
-8,Linear Regression,1.0162,488.31,12.34,68.33,-991.5613
