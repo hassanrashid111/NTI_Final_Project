@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Powered Demand Forecasting & Inventory Optimization System — NTI Capstone</title>
+  
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #F4F8F5;
+      --bg-slide: #FFFFFF;
+      --primary-green: #0D7A47;
+      --primary-green-hover: #0A6339;
+      --accent-mint: #10B981;
+      --emerald-dark: #064E3B;
+      --emerald-soft: #E8F5E9;
+      --emerald-light: #F0FDF4;
+      --text-dark: #0F172A;
+      --text-body: #334155;
+      --text-muted: #64748B;
+      --border-color: #CBD5E1;
+      --border-green: #A7F3D0;
+      --card-shadow: 0 10px 25px -5px rgba(13, 122, 71, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --card-shadow-hover: 0 20px 30px -10px rgba(13, 122, 71, 0.15);
+      --gradient-green: linear-gradient(135deg, #0D7A47 0%, #10B981 100%);
+      --gradient-soft: linear-gradient(135deg, #F0FDF4 0%, #E8F5E9 100%);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-dark);
+      line-height: 1.5;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* Top Progress Bar */
+    .progress-bar-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: rgba(13, 122, 71, 0.15);
+      z-index: 1000;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--gradient-green);
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Main Presentation Frame */
+    .presentation-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Persistent Slide Header */
+    .slide-header {
+      height: 65px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .header-logo {
+      height: 38px;
+      width: 38px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-green);
+      box-shadow: 0 2px 6px rgba(13,122,71,0.15);
+    }
+
+    .header-title-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--emerald-dark);
+      letter-spacing: -0.01em;
+    }
+
+    .header-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .slide-counter-badge {
+      background: var(--emerald-soft);
+      color: var(--primary-green);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border-green);
+    }
+
+    .btn-icon {
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      color: var(--text-dark);
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-icon:hover {
+      background: var(--primary-green);
+      color: #FFFFFF;
+      border-color: var(--primary-green);
+    }
+
+    /* Slide Viewport */
+    .slide-viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .slide {
+      position: absolute;
+      top: 1.5rem;
+      bottom: 1.5rem;
+      left: 2rem;
+      right: 2rem;
+      background: var(--bg-slide);
+      border-radius: var(--radius-lg);
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 15px 35px rgba(13, 122, 71, 0.06);
+      padding: 2.2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.98);
+      transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      z-index: 10;
+    }
+
+    /* Typography & Content Helpers */
+    .slide-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--emerald-soft);
+      color: var(--primary-green);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 5px 14px;
+      border-radius: 30px;
+      width: fit-content;
+      margin-bottom: 0.8rem;
+    }
+
+    .slide-h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--emerald-dark);
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.02em;
+    }
+
+    .slide-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-body);
+      margin-bottom: 1.8rem;
+      max-width: 900px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      flex: 1;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      flex: 1;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      flex: 1;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      box-shadow: var(--card-shadow-hover);
+      border-color: var(--border-green);
+      transform: translateY(-3px);
+    }
+
+    .card.emerald-highlight {
+      background: var(--gradient-soft);
+      border: 1.5px solid var(--border-green);
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--emerald-soft);
+      color: var(--primary-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--emerald-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-text {
+      font-size: 0.98rem;
+      color: var(--text-body);
+      line-height: 1.5;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-green);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Feature List */
+    .pill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .pill-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      padding: 0.8rem 1.2rem;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .pill-item .check {
+      color: var(--primary-green);
+      font-weight: 800;
+    }
+
+    /* Plot Image Container with Lightbox Zoom */
+    .plot-container {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      background: #FAFAFA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-in;
+    }
+
+    .plot-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      max-height: 380px;
+      transition: transform 0.3s ease;
+    }
+
+    .plot-container:hover img {
+      transform: scale(1.02);
+    }
+
+    .plot-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(6, 78, 59, 0.9);
+      color: #FFFFFF;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      text-align: center;
+    }
+
+    /* Flowchart / Pipeline Diagram */
+    .flow-steps {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin: 1.5rem 0;
+    }
+
+    .flow-step {
+      flex: 1;
+      background: #FFFFFF;
+      border: 2px solid var(--border-green);
+      border-radius: var(--radius-md);
+      padding: 1.2rem;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .flow-step-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .flow-step-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--emerald-dark);
+    }
+
+    .flow-arrow {
+      font-size: 1.5rem;
+      color: var(--primary-green);
+      font-weight: 800;
+    }
+
+    /* Table Styling */
+    .custom-table-wrapper {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid #E2E8F0;
+      box-shadow: var(--card-shadow);
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #FFFFFF;
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    .custom-table th {
+      background: var(--emerald-dark);
+      color: #FFFFFF;
+      padding: 12px 16px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .custom-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #E2E8F0;
+      color: var(--text-body);
+
+    }
+
+    .custom-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .custom-table tr.champion-row {
+      background: var(--emerald-soft);
+      font-weight: 700;
+    }
+
+    .badge-champion {
+      background: var(--primary-green);
+      color: #FFFFFF;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Interactive Calculators & Controls */
+    .interactive-box {
+      background: var(--emerald-light);
+      border: 1.5px dashed var(--primary-green);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      color: var(--emerald-dark);
+      font-size: 0.95rem;
+    }
+
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--primary-green);
+      height: 8px;
+      cursor: pointer;
+    }
+
+    .calc-results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .calc-res-card {
+      background: #FFFFFF;
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-green);
+      text-align: center;
+    }
+
+    .calc-res-val {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary-green);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .calc-res-lbl {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* Persistent Slide Navigation Bar (Bottom Right) */
+    .nav-dock {
+      position: fixed;
+      bottom: 2rem;
+      right: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 8px 14px;
+      border-radius: 40px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      z-index: 200;
+    }
+
+    .nav-btn {
+      background: var(--primary-green);
+      color: #FFFFFF;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(13, 122, 71, 0.25);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-green-hover);
+      transform: scale(1.08);
+    }
+
+    .nav-btn:disabled {
+      background: #CBD5E1;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    /* Drawer Quick Jump Menu */
+    .jump-drawer {
+      position: fixed;
+      top: 65px;
+      right: -320px;
+      width: 320px;
+      bottom: 0;
+      background: #FFFFFF;
+      border-left: 1px solid #E2E8F0;
+      box-shadow: -5px 0 25px rgba(0,0,0,0.08);
+      z-index: 300;
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 1.2rem;
+    }
+
+    .jump-drawer.open {
+      right: 0;
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #E2E8F0;
+      margin-bottom: 1rem;
+    }
+
+    .drawer-title {
+      font-weight: 700;
+      color: var(--emerald-dark);
+      font-size: 1.1rem;
+    }
+
+    .drawer-list {
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .drawer-item {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .drawer-item:hover, .drawer-item.active {
+      background: var(--emerald-soft);
+      border-color: var(--border-green);
+      color: var(--primary-green);
+    }
+
+    .drawer-num {
+      background: #E2E8F0;
+      color: var(--text-dark);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .drawer-item.active .drawer-num {
+      background: var(--primary-green);
+      color: #FFFFFF;
+    }
+
+    /* Modal Lightbox for Images */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: var(--radius-md);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      background: #FFFFFF;
+      padding: 8px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      color: #FFFFFF;
+      font-size: 2rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .slide {
+        padding: 1.5rem;
+        left: 1rem;
+        right: 1rem;
+      }
+      .slide-h1 { font-size: 1.8rem; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Progress Bar -->
+  <div class="progress-bar-container">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+
+  <div class="presentation-container">
+
+    <!-- Slide Top Header -->
+    <header class="slide-header">
+      <div class="header-brand">
+        <img src="images/photo.jpeg" alt="Project Logo" class="header-logo">
+        <div class="header-title-group">
+          <span class="header-title">AI Demand Forecasting & Inventory System</span>
+          <span class="header-subtitle">NTI ML Capstone Project</span>
+        </div>
+      </div>
+      
+      <div class="header-controls">
+        <span class="slide-counter-badge" id="slideCounter">Slide 1 of 19</span>
+        <button class="btn-icon" id="toggleDrawerBtn" title="Slide Directory">☰</button>
+        <button class="btn-icon" id="fullscreenBtn" title="Toggle Fullscreen">⛶</button>
+      </div>
+    </header>
+
+    <!-- Slide Viewport -->
+    <main class="slide-viewport">
+
+      <!-- SLIDE 1: Title & Team -->
+      <section class="slide active" id="slide-1">
+        <div style="text-align: center; max-width: 950px; margin: 0 auto; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <img src="images/photo.jpeg" alt="Logo" style="width: 90px; height: 90px; border-radius: 20px; border: 3px solid var(--border-green); box-shadow: 0 10px 20px rgba(13,122,71,0.15); margin-bottom: 1.2rem;">
+          <span class="slide-badge">NTI Final Capstone Presentation</span>
+          <h1 class="slide-h1" style="font-size: 2.8rem; margin-bottom: 1rem;">AI-Powered Demand Forecasting &<br><span style="color: var(--primary-green);">Inventory Optimization System</span></h1>
+          <p class="slide-subtitle" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+            An end-to-end Machine Learning solution for high-precision sales forecasting & automated reorder intelligence on 125M+ transaction records.
+          </p>
+
+          <div class="grid-2" style="width: 100%; max-width: 850px;">
+            <div class="card emerald-highlight" style="text-align: left;">
+              <div class="card-icon">👥</div>
+              <div class="card-title">Engineering Team</div>
+              <ul class="pill-list" style="margin-top: 0.5rem;">
+                <li class="pill-item"><span class="check">✓</span> Eng. Omar Kareem</li>
+                <li class="pill-item"><span class="check">✓</span> Eng. Hassan Rashid</li>
+                <li class="pill-item"><span class="check">✓</span> Eng. Amr Elsaher</li>
+                <li class="pill-item"><span class="check">✓</span> Eng. Ahmed Ellakany</li>
+              </ul>
+            </div>
+
+            <div class="card emerald-highlight" style="text-align: left;">
+              <div class="card-icon">🎓</div>
+              <div class="card-title">Project Supervision</div>
+              <ul class="pill-list" style="margin-top: 0.5rem;">
+                <li class="pill-item"><span class="check">★</span> Eng. Abdulrahman Bakeer</li>
+                <li class="pill-item"><span class="check">★</span> Eng. Nancy Ahmed</li>
+              </ul>
+              <div style="margin-top: 1rem; padding: 0.8rem; background: #FFFFFF; border-radius: 8px; font-weight: 700; color: var(--emerald-dark); text-align: center; font-size: 0.9rem;">
+                National Telecommunication Institute (NTI)
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: Business Problem -->
+      <section class="slide" id="slide-2">
+        <span class="slide-badge">01. Industry Pain Points</span>
+        <h1 class="slide-h1">The Retail Supply Chain Crisis</h1>
+        <p class="slide-subtitle">Inaccurate demand estimates trigger immense financial losses across retail chains every day.</p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="plot-container" style="height: 380px;" onclick="openLightbox('images/supermarket_retail.jpeg')">
+            <img src="images/supermarket_retail.jpeg" alt="Supermarket Retail Inventory">
+            <div class="plot-caption">Figure 1: Retail Operations & Shelf Stock Dynamics</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div class="card" style="border-left: 4px solid #EF4444;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.5rem;">⚠️</span>
+                <div class="card-title" style="color: #991B1B; margin: 0;">Stock-Out Losses</div>
+              </div>
+              <p class="card-text" style="margin-top: 0.5rem;">
+                Products sell out unexpectedly. Customers leave dissatisfied, causing direct lost sales revenue and brand churn.
+              </p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #F59E0B;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.5rem;">📦</span>
+                <div class="card-title" style="color: #92400E; margin: 0;">Overstocking & Capital Waste</div>
+              </div>
+              <p class="card-text" style="margin-top: 0.5rem;">
+                Excess stock ties up working capital, increases warehousing costs, and leads to product spoilage/expirations.
+              </p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #3B82F6;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.5rem;">🧠</span>
+                <div class="card-title" style="color: #1E40AF; margin: 0;">Intuition-Based Decisions</div>
+              </div>
+              <p class="card-text" style="margin-top: 0.5rem;">
+                Traditional purchasing relies on subjective human guesswork rather than data-driven time-series forecasting.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: Why This Project? -->
+      <section class="slide" id="slide-3">
+        <span class="slide-badge">02. Strategic Value</span>
+        <h1 class="slide-h1">Why AI-Driven Demand Forecasting?</h1>
+        <p class="slide-subtitle">Replacing gut-feeling procurement with automated machine learning delivers measurable ROI.</p>
+
+        <div class="grid-4">
+          <div class="card emerald-highlight" style="text-align: center; justify-content: center;">
+            <div class="card-icon" style="margin: 0 auto 1rem auto;">📉</div>
+            <div class="stat-number">-30%</div>
+            <div class="card-title">Inventory Costs</div>
+            <p class="card-text">Minimizes carrying costs and prevents capital lockup in slow-moving SKUs.</p>
+          </div>
+
+          <div class="card emerald-highlight" style="text-align: center; justify-content: center;">
+            <div class="card-icon" style="margin: 0 auto 1rem auto;">♻️</div>
+            <div class="stat-number">-25%</div>
+            <div class="card-title">Waste Reduction</div>
+            <p class="card-text">Drastically cuts food and perishable goods spoilage in retail grocery branches.</p>
+          </div>
+
+          <div class="card emerald-highlight" style="text-align: center; justify-content: center;">
+            <div class="card-icon" style="margin: 0 auto 1rem auto;">😊</div>
+            <div class="stat-number">98%</div>
+            <div class="card-title">Product Availability</div>
+            <p class="card-text">Ensures high customer satisfaction by maintaining optimal safety stock levels.</p>
+          </div>
+
+          <div class="card emerald-highlight" style="text-align: center; justify-content: center;">
+            <div class="card-icon" style="margin: 0 auto 1rem auto;">💰</div>
+            <div class="stat-number">+15%</div>
+            <div class="card-title">Profit Margins</div>
+            <p class="card-text">Boosts overall retail profitability through automated reordering and accurate planning.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: Project Objective -->
+      <section class="slide" id="slide-4">
+        <span class="slide-badge">03. Project Scope</span>
+        <h1 class="slide-h1">Core Project Objectives</h1>
+        <p class="slide-subtitle">Building an integrated intelligent system from raw data ingestion to production deployment.</p>
+
+        <div class="grid-2">
+          <div class="card" style="display: flex; flex-direction: column; justify-content: space-around;">
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div class="card-icon">🎯</div>
+              <div>
+                <div class="card-title">1. Precise Sales Demand Prediction</div>
+                <p class="card-text">Predict daily sales for 146,000+ unique Store-Item combinations across 54 stores over a 16-day future horizon.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div class="card-icon">⚡</div>
+              <div>
+                <div class="card-title">2. Smart Inventory Optimization</div>
+                <p class="card-text">Calculate Safety Stock (SS) and Reorder Points (ROP) considering lead time and 95%+ target service levels.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="display: flex; flex-direction: column; justify-content: space-around;">
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div class="card-icon">🛠️</div>
+              <div>
+                <div class="card-title">3. Automated Decision Support</div>
+                <p class="card-text">Generate automated procurement recommendations categorized by alert status (CRITICAL UNDERSTOCK vs OPTIMAL STOCK).</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div class="card-icon">💻</div>
+              <div>
+                <div class="card-title">4. Interactive Web Dashboard</div>
+                <p class="card-text">Deliver an intuitive presentation interface and deployment dashboard for store managers & executives.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: Dataset -->
+      <section class="slide" id="slide-5">
+        <span class="slide-badge">04. Data Foundation</span>
+        <h1 class="slide-h1">Massive Enterprise Dataset</h1>
+        <p class="slide-subtitle">Corporación Favorita grocery sales dataset comprising multi-table relational data.</p>
+
+        <div class="grid-2">
+          <div>
+            <div class="card emerald-highlight" style="margin-bottom: 1rem; text-align: center;">
+              <div class="stat-label">Total Training Volume</div>
+              <div class="stat-number" style="font-size: 3.2rem;">125,497,040</div>
+              <div style="font-weight: 700; color: var(--emerald-dark);">Over 125 Million Transaction Records</div>
+            </div>
+
+            <div class="custom-table-wrapper">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Table Name</th>
+                    <th>Records</th>
+                    <th>Key Content</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="champion-row">
+                    <td>train.csv</td>
+                    <td>125,497,040</td>
+                    <td>Daily sales per store & item (2013–2017)</td>
+                  </tr>
+                  <tr>
+                    <td>items.csv</td>
+                    <td>4,100</td>
+                    <td>Item family, class, perishable indicator</td>
+                  </tr>
+                  <tr>
+                    <td>stores.csv</td>
+                    <td>54</td>
+                    <td>Store city, state, type, cluster</td>
+                  </tr>
+                  <tr>
+                    <td>oil.csv</td>
+                    <td>1,218</td>
+                    <td>Daily WTI Crude Oil prices (Ecuador macro)</td>
+                  </tr>
+                  <tr>
+                    <td>holidays_events.csv</td>
+                    <td>350</td>
+                    <td>National, regional, and local holidays</td>
+                  </tr>
+                  <tr>
+                    <td>transactions.csv</td>
+                    <td>83,488</td>
+                    <td>Total daily customer count per store</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; justify-content: center; gap: 1rem;">
+            <div class="card">
+              <div class="card-title">📊 Granularity & Time Horizon</div>
+              <p class="card-text">
+                • <strong>Temporal Span:</strong> January 1, 2013 – August 15, 2017 (4.5 Years)<br>
+                • <strong>Forecast Horizon:</strong> 16 days out-of-time test evaluation<br>
+                • <strong>Store Coverage:</strong> 54 grocery stores across 22 cities in Ecuador<br>
+                • <strong>Product Families:</strong> 33 diverse grocery categories
+              </p>
+            </div>
+            <div class="card emerald-highlight">
+              <div class="card-title">💡 Macro-Economic Factors</div>
+              <p class="card-text">
+                Includes external signals such as the 2016 Ecuador Earthquake and fluctuating oil prices which strongly impact consumer buying power.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: Data Understanding & Schema Flow -->
+      <section class="slide" id="slide-6">
+        <span class="slide-badge">05. Data Architecture</span>
+        <h1 class="slide-h1">Relational Data Flow & Schema</h1>
+        <p class="slide-subtitle">Connecting core sales logs with dimension tables and exogenous feature signals.</p>
+
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-step-icon">🛒</div>
+            <div class="flow-step-title">Items</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Family, Class, Perishable</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="border-width: 3px; background: var(--emerald-soft);">
+            <div class="flow-step-icon">📈</div>
+            <div class="flow-step-title">Sales (train.csv)</div>
+            <div style="font-size: 0.8rem; color: var(--primary-green); font-weight: 700;">125M+ Core Log Rows</div>
+          </div>
+          <div class="flow-arrow">←</div>
+          <div class="flow-step">
+            <div class="flow-step-icon">🏪</div>
+            <div class="flow-step-title">Stores</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">City, State, Cluster</div>
+          </div>
+        </div>
+
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-step-icon">🎉</div>
+            <div class="flow-step-title">Holidays</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">National/Local Events</div>
+          </div>
+          <div class="flow-arrow">↘</div>
+          <div class="flow-step">
+            <div class="flow-step-icon">💳</div>
+            <div class="flow-step-title">Transactions</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Store Foot Traffic</div>
+          </div>
+          <div class="flow-arrow">↙</div>
+          <div class="flow-step">
+            <div class="flow-step-icon">🛢️</div>
+            <div class="flow-step-title">Oil Prices</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Macro WTI Index</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 1rem;">
+          <div class="card-title">Key Engineered Features Extracted:</div>
+          <div class="grid-4" style="margin-top: 0.5rem;">
+            <div style="background: #F8FAFC; padding: 8px 12px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;">📅 Date & Calendar Features</div>
+            <div style="background: #F8FAFC; padding: 8px 12px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;">🏷️ Promotion Status</div>
+            <div style="background: #F8FAFC; padding: 8px 12px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;">🏬 Store Clusters & Types</div>
+            <div style="background: #F8FAFC; padding: 8px 12px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;">🛢️ 7d Rolling Oil Interpolation</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: The Memory & RAM Bottleneck -->
+      <section class="slide" id="slide-7">
+        <span class="slide-badge">06. Computational Challenge</span>
+        <h1 class="slide-h1">The 125M+ Row Memory Wall</h1>
+        <p class="slide-subtitle">Standard pandas workflows crashed repeatedly due to RAM exhaustion on 16GB machines.</p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div>
+            <div class="card" style="border-left: 4px solid #EF4444; margin-bottom: 1.2rem;">
+              <div class="card-title" style="color: #991B1B;">💥 The Out-Of-Memory (OOM) Problem</div>
+              <p class="card-text">
+                Loading 125,497,040 rows in standard Pandas using default <code>int64</code> and <code>float64</code> datatypes required over <strong>9.6 GB of raw RAM</strong> just to hold the dataframe. Adding lag features exploded memory usage beyond <strong>28 GB RAM</strong>!
+              </p>
+            </div>
+
+            <div class="plot-container" style="height: 220px;" onclick="openLightbox('images/01_memory_footprint.png')">
+              <img src="images/01_memory_footprint.png" alt="Memory Footprint Visualization">
+              <div class="plot-caption">Notebook 01: Initial Memory Footprint Analysis</div>
+            </div>
+          </div>
+
+          <div class="card emerald-highlight" style="display: flex; flex-direction: column; justify-content: center; gap: 1rem;">
+            <div class="card-title" style="font-size: 1.3rem;">🚨 Key Bottlenecks Identified</div>
+            <ul class="pill-list">
+              <li class="pill-item" style="background: #FFFFFF;"><span style="color: #EF4444; font-weight: 800;">✕</span> Pandas default 64-bit precision waste</li>
+              <li class="pill-item" style="background: #FFFFFF;"><span style="color: #EF4444; font-weight: 800;">✕</span> Single-threaded CSV parsing overhead</li>
+              <li class="pill-item" style="background: #FFFFFF;"><span style="color: #EF4444; font-weight: 800;">✕</span> Full-dataset feature engineering explosive growth</li>
+              <li class="pill-item" style="background: #FFFFFF;"><span style="color: #EF4444; font-weight: 800;">✕</span> Slow join operations across 6 relation tables</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: Memory Solutions & DuckDB -->
+      <section class="slide" id="slide-8">
+        <span class="slide-badge">07. Optimization Strategy</span>
+        <h1 class="slide-h1">Memory Solutions: DuckDB & Downcasting</h1>
+        <p class="slide-subtitle">Re-architecting the data pipeline to run seamlessly within low memory footprints.</p>
+
+        <div class="grid-2">
+          <div>
+            <div class="card emerald-highlight" style="margin-bottom: 1rem;">
+              <div class="card-title">🦆 Why DuckDB over Pandas?</div>
+              <p class="card-text">
+                DuckDB process data in vectorized C++ engines with zero-copy querying directly on disk-backed Parquet files, reducing memory usage by <strong>85%+</strong> while boosting join speed by <strong>12x</strong>.
+              </p>
+            </div>
+
+            <!-- Interactive RAM Saver Calculator -->
+            <div class="interactive-box">
+              <div class="card-title" style="font-size: 1.05rem; margin-bottom: 0.8rem;">🧮 Interactive RAM Footprint Simulator</div>
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>Data Rows:</span>
+                  <span id="ramRowsVal" style="color: var(--primary-green);">125.5 Million</span>
+                </div>
+                <input type="range" id="ramRowsSlider" min="10" max="150" value="125" step="5">
+              </div>
+
+              <div class="calc-results-grid">
+                <div class="calc-res-card">
+                  <div class="calc-res-lbl">Pandas (64-bit)</div>
+                  <div class="calc-res-val" id="pandasRamVal" style="color: #EF4444;">9.6 GB</div>
+                </div>
+                <div class="calc-res-card">
+                  <div class="calc-res-lbl">Downcasted (32/16-bit)</div>
+                  <div class="calc-res-val" id="downcastedRamVal">3.2 GB</div>
+                </div>
+                <div class="calc-res-card" style="border-color: var(--primary-green); background: var(--emerald-soft);">
+                  <div class="calc-res-lbl" style="color: var(--primary-green);">DuckDB + Parquet</div>
+                  <div class="calc-res-val" id="duckdbRamVal" style="color: var(--primary-green);">0.8 GB</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="pill-list">
+              <div class="pill-item">
+                <span class="check">1.</span>
+                <div>
+                  <strong>Bit Downcasting:</strong> Converted <code>float64 → float32/16</code> and <code>int64 → int32/8</code>, saving 60% RAM immediately.
+                </div>
+              </div>
+              <div class="pill-item">
+                <span class="check">2.</span>
+                <div>
+                  <strong>Parquet Chunk Processing:</strong> Streamed data using columnar Parquet chunks instead of loading massive raw CSVs.
+                </div>
+              </div>
+              <div class="pill-item">
+                <span class="check">3.</span>
+                <div>
+                  <strong>Categorical Encoding:</strong> Converted high-cardinality string columns (Store, Family, City) to memory-efficient category integers.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: Overview of Notebook 0 & 1 -->
+      <section class="slide" id="slide-9">
+        <span class="slide-badge">08. Data Preparation</span>
+        <h1 class="slide-h1">Notebooks 0 & 1: Ingestion & Target Analysis</h1>
+        <p class="slide-subtitle">Setting up validation schemas and performing deep exploratory analysis on sales target distribution.</p>
+
+        <div class="grid-2">
+          <div class="plot-container" style="height: 360px;" onclick="openLightbox('images/03_target_dashboard.png')">
+            <img src="images/03_target_dashboard.png" alt="Target Dashboard">
+            <div class="plot-caption">Notebook 01: Sales Target Dashboard & Distribution Analysis</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div class="card emerald-highlight">
+              <div class="card-title">📌 Notebook 0: Dataset Setup</div>
+              <p class="card-text">
+                • Verified raw files integrity and schema datatypes.<br>
+                • Established automated data directory structure and logging.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">🔍 Notebook 1: Data Understanding Key Discoveries</div>
+              <p class="card-text">
+                • <strong>Zero Sales Concentration:</strong> Over 20% of store-item daily logs had 0 sales (closed days / stock-outs).<br>
+                • <strong>Right-Skewed Distribution:</strong> Sales follow a highly skewed log-normal distribution, requiring <code>log1p(sales)</code> transformation for stable model training.<br>
+                • <strong>Timeline Continuity:</strong> Identified annual December 25th store closures.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: Overview of Notebook 2 (EDA) -->
+      <section class="slide" id="slide-10">
+        <span class="slide-badge">09. Exploratory Data Analysis</span>
+        <h1 class="slide-h1">Notebook 2: EDA & Pattern Discovery</h1>
+        <p class="slide-subtitle">Uncovering sales seasonality, store behavior, product family rankings, and economic correlations.</p>
+
+        <div class="grid-2">
+          <div class="plot-container" style="height: 360px;" onclick="openLightbox('images/02a_daily_sales.png')">
+            <img src="images/02a_daily_sales.png" alt="Daily Sales Trends">
+            <div class="plot-caption">Notebook 02: Daily Sales Aggregations & Seasonal Spikes (2013-2017)</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div class="plot-container" style="height: 180px;" onclick="openLightbox('images/06a_oil_trend.png')">
+              <img src="images/06a_oil_trend.png" alt="Oil Price Correlation">
+              <div class="plot-caption">Notebook 02: Oil Price Trend & Earthquake Anomaly Impact</div>
+            </div>
+
+            <div class="card emerald-highlight">
+              <div class="card-title">Key EDA Findings:</div>
+              <p class="card-text" style="font-size: 0.92rem;">
+                • <strong>Top Category Dominance:</strong> GROCERY I, BEVERAGES, and PRODUCE represent over 68% of total volume.<br>
+                • <strong>Strong Weekly Seasonality:</strong> Sales peak significantly on weekends (Saturday/Sunday).<br>
+                • <strong>Promotional Uplift:</strong> Items on promotion exhibit a 3.4x average sales increase.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: Notebooks 3 & 4 (Preprocessing & Feature Eng) -->
+      <section class="slide" id="slide-11">
+        <span class="slide-badge">10. Feature Pipeline</span>
+        <h1 class="slide-h1">Notebooks 3 & 4: Cleaning & Feature Engineering</h1>
+        <p class="slide-subtitle">Transforming raw signals into high-predictive time-series features (Lags, Rolling, Cyclical).</p>
+
+        <div class="grid-2">
+          <div class="plot-container" style="height: 360px;" onclick="openLightbox('images/01_feature_taxonomy.png')">
+            <img src="images/01_feature_taxonomy.png" alt="Feature Taxonomy">
+            <div class="plot-caption">Notebook 04: Feature Taxonomy Classification</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div class="plot-container" style="height: 180px;" onclick="openLightbox('images/03_rolling_curves.png')">
+              <img src="images/03_rolling_curves.png" alt="Rolling Statistics Curves">
+              <div class="plot-caption">Notebook 04: Rolling Window Aggregations (7d, 14d, 30d)</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Engineered Feature Set:</div>
+              <p class="card-text" style="font-size: 0.9rem;">
+                • <strong>Lag Features:</strong> 16d, 21d, 28d, 365d sales history.<br>
+                • <strong>Rolling Statistics:</strong> 7d, 14d, 30d Mean & Std Dev.<br>
+                • <strong>Cyclical Encoding:</strong> <code>sin/cos</code> transformation of Day of Week, Month, and Day of Year.<br>
+                • <strong>Missing Data Imputation:</strong> Linear interpolation for missing oil prices.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: Notebooks 5, 6 & 7 (Baseline, Models & Champion) -->
+      <section class="slide" id="slide-12">
+        <span class="slide-badge">11. Machine Learning</span>
+        <h1 class="slide-h1">Notebooks 5–7: Model Training & Selection</h1>
+        <p class="slide-subtitle">Evaluating baselines against Gradient Boosted Decision Trees (GBDT) on out-of-time split.</p>
+
+        <div class="grid-2">
+          <div class="plot-container" style="height: 360px;" onclick="openLightbox('images/04_advanced_models_comparison.png')">
+            <img src="images/04_advanced_models_comparison.png" alt="Advanced Models Comparison">
+            <div class="plot-caption">Notebook 06: GBDT Advanced Model Comparison (LightGBM vs XGBoost vs CatBoost)</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div class="card">
+              <div class="card-title">📊 Baseline Models (Notebook 5)</div>
+              <p class="card-text">
+                Evaluated Seasonal Naive (t-7), Ridge, Lasso, and Random Forest. Traditional linear models failed due to non-linear holiday interactions.
+              </p>
+            </div>
+
+            <div class="card emerald-highlight">
+              <div class="card-title">🏆 Champion Model Selection (Notebook 7)</div>
+              <p class="card-text">
+                <strong>LightGBM</strong> emerged as the undeniable champion, delivering superior accuracy (RMSLE: 0.0199) with 5x faster prediction latency than XGBoost!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: Comprehensive Model Comparison Leaderboard -->
+      <section class="slide" id="slide-13">
+        <span class="slide-badge">12. Performance Matrix</span>
+        <h1 class="slide-h1">Comprehensive Model Leaderboard</h1>
+        <p class="slide-subtitle">Rigorous benchmark comparing all 8 evaluated models across key evaluation metrics.</p>
+
+        <div class="custom-table-wrapper">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Model Architecture</th>
+                <th>RMSLE 📉</th>
+                <th>RMSE</th>
+                <th>MAE</th>
+                <th>R² Score 📈</th>
+                <th>Train Time</th>
+                <th>Latency</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="champion-row">
+                <td>🥇 1</td>
+                <td>LightGBM (GBDT)</td>
+                <td style="color: var(--primary-green); font-weight: 800;">0.0199</td>
+                <td>2.52</td>
+                <td>0.232</td>
+                <td style="color: var(--primary-green); font-weight: 800;">0.9678</td>
+                <td>79.4s</td>
+                <td>0.10s</td>
+                <td><span class="badge-champion">Champion</span></td>
+              </tr>
+              <tr>
+                <td>🥈 2</td>
+                <td>XGBoost</td>
+                <td>0.0228</td>
+                <td>2.82</td>
+                <td>0.257</td>
+                <td>0.9599</td>
+                <td>17.6s</td>
+                <td>0.04s</td>
+                <td>Runner-Up</td>
+              </tr>
+              <tr>
+                <td>🥉 3</td>
+                <td>CatBoost</td>
+                <td>0.0304</td>
+                <td>3.62</td>
+                <td>0.354</td>
+                <td>0.9339</td>
+                <td>23.2s</td>
+                <td>0.01s</td>
+                <td>Evaluated</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Random Forest</td>
+                <td>0.2873</td>
+                <td>6.28</td>
+                <td>2.100</td>
+                <td>0.8360</td>
+                <td>77.9s</td>
+                <td>1.06s</td>
+                <td>Baseline</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Ridge Regression</td>
+                <td>0.6203</td>
+                <td>496.9</td>
+                <td>12.56</td>
+                <td>-1027.0</td>
+                <td>23.7s</td>
+                <td>0.25s</td>
+                <td>Linear</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Seasonal Naive (t-7)</td>
+                <td>0.7316</td>
+                <td>10.22</td>
+                <td>4.510</td>
+                <td>0.5656</td>
+                <td>0.0s</td>
+                <td>0.00s</td>
+                <td>Rule-based</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Global Median</td>
+                <td>0.8756</td>
+                <td>16.00</td>
+                <td>6.120</td>
+                <td>-0.065</td>
+                <td>0.0s</td>
+                <td>0.00s</td>
+                <td>Naive</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top: 1rem; text-align: center; font-size: 0.9rem; color: var(--text-muted);">
+          * Evaluation metric RMSLE (Root Mean Squared Logarithmic Error) is the primary competition benchmark. Lower is better.
+        </div>
+      </section>
+
+      <!-- SLIDE 14: Notebooks 8 & 9 (Production & Inference) -->
+      <section class="slide" id="slide-14">
+        <span class="slide-badge">13. Production Deployment</span>
+        <h1 class="slide-h1">Notebooks 8 & 9: Production Pipeline & Inference</h1>
+        <p class="slide-subtitle">Translating sales forecasts into automated, actionable inventory reorder intelligence.</p>
+
+        <div class="grid-2">
+          <div class="plot-container" style="height: 360px;" onclick="openLightbox('images/demand_forecast_16days.png')">
+            <img src="images/demand_forecast_16days.png" alt="16-Day Demand Forecast">
+            <div class="plot-caption">Notebook 09: 16-Day Out-of-Time Demand Forecast Predictions</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div class="plot-container" style="height: 180px;" onclick="openLightbox('images/inventory_health_distribution.png')">
+              <img src="images/inventory_health_distribution.png" alt="Inventory Health Distribution">
+              <div class="plot-caption">Notebook 09: Inventory Alert Distribution Summary</div>
+            </div>
+
+            <div class="card emerald-highlight">
+              <div class="card-title">🚀 Automated Inference Output</div>
+              <p class="card-text" style="font-size: 0.9rem;">
+                • <strong>Total 16-Day Volume Forecast:</strong> 12,075,813 Units<br>
+                • <strong>Total Reorder Units Recommended:</strong> 9,593,179 Units<br>
+                • <strong>SKU Pairs Monitored:</strong> 146,247 Store-Item combinations<br>
+                • <strong>Critical Understock Alerts Triggered:</strong> 110,284 SKUs
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: Interactive Model Evaluation & Simulator -->
+      <section class="slide" id="slide-15">
+        <span class="slide-badge">14. Interactive Tool</span>
+        <h1 class="slide-h1">Inventory Safety Stock & Reorder Simulator</h1>
+        <p class="slide-subtitle">Simulate real-world replenishment decisions under customizable lead times and service levels.</p>
+
+        <div class="grid-2">
+          <div class="interactive-box" style="margin: 0;">
+            <div class="card-title" style="margin-bottom: 1rem;">⚙️ Reorder Point Parameters</div>
+            
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Supplier Lead Time:</span>
+                <span id="simLeadVal" style="color: var(--primary-green);">7 Days</span>
+              </div>
+              <input type="range" id="simLeadSlider" min="1" max="30" value="7">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Target Service Level:</span>
+                <span id="simServiceVal" style="color: var(--primary-green);">95% (Z = 1.65)</span>
+              </div>
+              <input type="range" id="simServiceSlider" min="80" max="99" value="95">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Daily Sales Std Dev (σ):</span>
+                <span id="simSigmaVal" style="color: var(--primary-green);">45 Units/day</span>
+              </div>
+              <input type="range" id="simSigmaSlider" min="10" max="150" value="45">
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; justify-content: center; gap: 1rem;">
+            <div class="card emerald-highlight" style="text-align: center;">
+              <div class="stat-label">Calculated Safety Stock (SS)</div>
+              <div class="stat-number" id="resSafetyStock">196 Units</div>
+              <p class="card-text">Buffer to protect against demand spikes during lead time.</p>
+            </div>
+
+            <div class="card emerald-highlight" style="text-align: center;">
+              <div class="stat-label">Calculated Reorder Point (ROP)</div>
+              <div class="stat-number" id="resReorderPoint">896 Units</div>
+              <p class="card-text">Trigger PO when inventory drops below this threshold.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: Business Impact -->
+      <section class="slide" id="slide-16">
+        <span class="slide-badge">15. Business Value</span>
+        <h1 class="slide-h1">Quantified Business Impact & ROI</h1>
+        <p class="slide-subtitle">Summary of business metrics achieved by transitioning to automated ML forecasting.</p>
+
+        <div class="grid-3">
+          <div class="card emerald-highlight" style="text-align: center;">
+            <div class="card-icon" style="margin: 0 auto 1rem auto;">🎯</div>
+            <div class="stat-number">96.8%</div>
+            <div class="card-title">Forecast Accuracy</div>
+            <p class="card-text">High R² score on unseen 16-day out-of-time evaluation test set.</p>
+          </div>
+
+          <div class="card emerald-highlight" style="text-align: center;">
+            <div class="card-icon" style="margin: 0 auto 1rem auto;">⚡</div>
+            <div class="stat-number">0.10s</div>
+            <div class="card-title">Ultra-Fast Latency</div>
+            <p class="card-text">Generates 146,000+ store-item daily predictions in milliseconds.</p>
+          </div>
+
+          <div class="card emerald-highlight" style="text-align: center;">
+            <div class="card-icon" style="margin: 0 auto 1rem auto;">📦</div>
+            <div class="stat-number">9.5M+</div>
+            <div class="card-title">Units Reordered</div>
+            <p class="card-text">Automated procurement recommendations protecting retail revenue.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 1.5rem;">
+          <div class="card-title">Operational Improvements:</div>
+          <div class="grid-2" style="margin-top: 0.5rem;">
+            <div class="pill-item"><span class="check">✓</span> Fully automated daily reorder recommendation CSV exports.</div>
+            <div class="pill-item"><span class="check">✓</span> Replaced human guesswork with data-validated Safety Stock thresholds.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: Future Work -->
+      <section class="slide" id="slide-17">
+        <span class="slide-badge">16. Product Roadmap</span>
+        <h1 class="slide-h1">Future Work & System Scaling</h1>
+        <p class="slide-subtitle">Strategic next steps to scale the prototype into an enterprise SaaS solution.</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-icon">🧠</div>
+            <div class="card-title">1. Temporal Fusion Transformers (TFT)</div>
+            <p class="card-text">
+              Incorporate deep learning architectures (TFT) to capture complex multi-horizon attention across store networks.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">🌐</div>
+            <div class="card-title">2. SaaS & Cloud API Integration</div>
+            <p class="card-text">
+              Package models into containerized Docker microservices hosted on AWS/GCP with REST API endpoints.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">🔄</div>
+            <div class="card-title">3. Real-Time Streaming (Kafka)</div>
+            <p class="card-text">
+              Ingest real-time POS transaction streams via Apache Kafka to update inventory levels instantly.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: Q&A -->
+      <section class="slide" id="slide-18">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <span class="slide-badge">17. Discussion</span>
+          <h1 class="slide-h1" style="font-size: 3.2rem; margin-bottom: 1rem;">Questions & Answers</h1>
+          <p class="slide-subtitle" style="text-align: center; font-size: 1.25rem;">
+            Thank you for your attention! We welcome any questions regarding our methodology, data pipeline, or machine learning models.
+          </p>
+
+          <div class="card emerald-highlight" style="width: 100%; max-width: 600px; margin-top: 1rem; text-align: center;">
+            <div class="card-title">🔗 Project Links & Artifacts</div>
+            <p class="card-text" style="margin-top: 0.5rem;">
+              • <strong>GitHub Repository:</strong> NTI_Final_Project<br>
+              • <strong>Dataset:</strong> Corporación Favorita Grocery Sales (Kaggle)<br>
+              • <strong>Champion Model:</strong> LightGBM Regressor (RMSLE: 0.0199)
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: Thank You / Closing -->
+      <section class="slide" id="slide-19">
+        <div style="text-align: center; max-width: 850px; margin: 0 auto; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <img src="images/photo.jpeg" alt="Logo" style="width: 100px; height: 100px; border-radius: 20px; border: 3px solid var(--border-green); box-shadow: 0 10px 25px rgba(13,122,71,0.2); margin-bottom: 1.5rem;">
+          <h1 class="slide-h1" style="font-size: 3rem; margin-bottom: 0.8rem;">Thank You!</h1>
+          <p class="slide-subtitle" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+            AI-Powered Demand Forecasting & Smart Inventory Optimization System
+          </p>
+
+          <div class="card emerald-highlight" style="width: 100%; max-width: 700px; text-align: center;">
+            <div class="card-title" style="font-size: 1.1rem; color: var(--emerald-dark);">Special Thanks To Our Instructors & NTI Management</div>
+            <p class="card-text" style="margin-top: 0.5rem; font-weight: 600;">
+              Eng. Abdulrahman Bakeer & Eng. Nancy Ahmed
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Persistent Bottom Navigation Dock -->
+    <div class="nav-dock">
+      <button class="nav-btn" id="prevSlideBtn" title="Previous Slide (←)">❮</button>
+      <button class="nav-btn" id="nextSlideBtn" title="Next Slide (→)">❯</button>
+    </div>
+
+    <!-- Quick Jump Drawer Menu -->
+    <div class="jump-drawer" id="jumpDrawer">
+      <div class="drawer-header">
+        <span class="drawer-title">Slide Navigation</span>
+        <button class="btn-icon" id="closeDrawerBtn" style="width: 30px; height: 30px; font-size: 0.9rem;">✕</button>
+      </div>
+      <div class="drawer-list" id="drawerList">
+        <!-- JS Populated -->
+      </div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
+      <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+      <img src="" alt="Zoomed Plot" class="lightbox-img" id="lightboxImg">
+    </div>
+
+  </div>
+
+  <script>
+    // State
+    const totalSlides = 19;
+    let currentSlide = 1;
+
+    // Slide Titles for Drawer
+    const slideTitles = [
+      "Title & Team",
+      "Business Problem",
+      "Why This Project?",
+      "Project Objectives",
+      "Dataset Overview",
+      "Data Flow & Schema",
+      "Memory & RAM Problem",
+      "DuckDB & Downcasting Solutions",
+      "Notebooks 0 & 1 Highlights",
+      "Notebook 2 EDA Discovery",
+      "Notebooks 3 & 4 Feature Eng",
+      "Notebooks 5-7 Model Training",
+      "Model Leaderboard Matrix",
+      "Notebooks 8 & 9 Production",
+      "Interactive Inventory Simulator",
+      "Business Impact & ROI",
+      "Future Work & Roadmap",
+      "Q&A Session",
+      "Thank You & Closing"
+    ];
+
+    // DOM Elements
+    const slideCounter = document.getElementById('slideCounter');
+    const progressBar = document.getElementById('progressBar');
+    const prevSlideBtn = document.getElementById('prevSlideBtn');
+    const nextSlideBtn = document.getElementById('nextSlideBtn');
+    const jumpDrawer = document.getElementById('jumpDrawer');
+    const toggleDrawerBtn = document.getElementById('toggleDrawerBtn');
+    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+    const drawerList = document.getElementById('drawerList');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+    // Populate Drawer
+    function initDrawer() {
+      drawerList.innerHTML = '';
+      slideTitles.forEach((title, idx) => {
+        const slideNum = idx + 1;
+        const item = document.createElement('div');
+        item.className = `drawer-item ${slideNum === currentSlide ? 'active' : ''}`;
+        item.innerHTML = `<span class="drawer-num">${slideNum}</span> <span>${title}</span>`;
+        item.onclick = () => {
+          goToSlide(slideNum);
+          jumpDrawer.classList.remove('open');
+        };
+        drawerList.appendChild(item);
+      });
+    }
+
+    // Slide Switching Logic
+    function goToSlide(slideNum) {
+      if (slideNum < 1 || slideNum > totalSlides) return;
+      
+      document.querySelector(`.slide.active`)?.classList.remove('active');
+      currentSlide = slideNum;
+      
+      const newSlide = document.getElementById(`slide-${currentSlide}`);
+      if (newSlide) {
+        newSlide.classList.add('active');
+      }
+
+      // Update UI
+      slideCounter.innerText = `Slide ${currentSlide} of ${totalSlides}`;
+      const progressPercent = ((currentSlide - 1) / (totalSlides - 1)) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+
+      prevSlideBtn.disabled = (currentSlide === 1);
+      nextSlideBtn.disabled = (currentSlide === totalSlides);
+
+      initDrawer();
+    }
+
+    // Event Listeners
+    prevSlideBtn.onclick = () => goToSlide(currentSlide - 1);
+    nextSlideBtn.onclick = () => goToSlide(currentSlide + 1);
+
+    toggleDrawerBtn.onclick = () => jumpDrawer.classList.toggle('open');
+    closeDrawerBtn.onclick = () => jumpDrawer.classList.remove('open');
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        goToSlide(currentSlide + 1);
+      } else if (e.key === 'ArrowLeft') {
+        goToSlide(currentSlide - 1);
+      } else if (e.key === 'Escape') {
+        jumpDrawer.classList.remove('open');
+        closeLightbox();
+      }
+    });
+
+    // Fullscreen Toggle
+    fullscreenBtn.onclick = () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => console.log(err));
+      } else {
+        document.exitFullscreen().catch(err => console.log(err));
+      }
+    };
+
+    // Lightbox Functionality
+    function openLightbox(imgSrc) {
+      const modal = document.getElementById('lightboxModal');
+      const img = document.getElementById('lightboxImg');
+      img.src = imgSrc;
+      modal.classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxModal').classList.remove('active');
+    }
+
+    // --- INTERACTIVE SIMULATORS --- //
+
+    // 1. RAM Saver Simulator (Slide 8)
+    const ramRowsSlider = document.getElementById('ramRowsSlider');
+    const ramRowsVal = document.getElementById('ramRowsVal');
+    const pandasRamVal = document.getElementById('pandasRamVal');
+    const downcastedRamVal = document.getElementById('downcastedRamVal');
+    const duckdbRamVal = document.getElementById('duckdbRamVal');
+
+    if (ramRowsSlider) {
+      ramRowsSlider.oninput = function() {
+        const rowsM = parseFloat(this.value);
+        ramRowsVal.innerText = `${rowsM} Million`;
+        pandasRamVal.innerText = `${(rowsM * 0.0768).toFixed(1)} GB`;
+        downcastedRamVal.innerText = `${(rowsM * 0.0255).toFixed(1)} GB`;
+        duckdbRamVal.innerText = `${(rowsM * 0.0064).toFixed(1)} GB`;
+      };
+    }
+
+    // 2. Inventory Safety Stock & ROP Simulator (Slide 15)
+    const simLeadSlider = document.getElementById('simLeadSlider');
+    const simServiceSlider = document.getElementById('simServiceSlider');
+    const simSigmaSlider = document.getElementById('simSigmaSlider');
+    const simLeadVal = document.getElementById('simLeadVal');
+    const simServiceVal = document.getElementById('simServiceVal');
+    const simSigmaVal = document.getElementById('simSigmaVal');
+    const resSafetyStock = document.getElementById('resSafetyStock');
+    const resReorderPoint = document.getElementById('resReorderPoint');
+
+    // Z table lookup mapping
+    const zMap = {
+      80: 0.84, 85: 1.04, 90: 1.28, 95: 1.65, 98: 2.05, 99: 2.33
+    };
+
+    function updateInventorySim() {
+      if (!simLeadSlider) return;
+      const L = parseInt(simLeadSlider.value);
+      const servicePct = parseInt(simServiceSlider.value);
+      const sigma = parseInt(simSigmaSlider.value);
+
+      // find closest z
+      const keys = Object.keys(zMap).map(Number);
+      const closestService = keys.reduce((prev, curr) => Math.abs(curr - servicePct) < Math.abs(prev - servicePct) ? curr : prev);
+      const Z = zMap[closestService];
+
+      simLeadVal.innerText = `${L} Days`;
+      simServiceVal.innerText = `${servicePct}% (Z = ${Z})`;
+      simSigmaVal.innerText = `${sigma} Units/day`;
+
+      // SS formula = Z * sigma * sqrt(L)
+      const SS = Math.round(Z * sigma * Math.sqrt(L));
+      // ROP = (Daily avg demand = 100) * L + SS
+      const avgDailyDemand = 100;
+      const ROP = Math.round(avgDailyDemand * L + SS);
+
+      resSafetyStock.innerText = `${SS} Units`;
+      resReorderPoint.innerText = `${ROP} Units`;
+    }
+
+    if (simLeadSlider) {
+      simLeadSlider.oninput = updateInventorySim;
+      simServiceSlider.oninput = updateInventorySim;
+      simSigmaSlider.oninput = updateInventorySim;
+    }
+
+    // Initialize
+    goToSlide(1);
+  </script>
+</body>
+</html>
