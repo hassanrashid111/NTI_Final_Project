@@ -1,0 +1,74 @@
+<!-- Inventory Optimization Page — Enhanced -->
+<div class="p-8 space-y-8">
+  <!-- Section Header -->
+  <div class="section-header animate-fadein">
+    <div class="header-icon header-icon-emerald">
+      <i data-lucide="package" class="w-6 h-6"></i>
+    </div>
+    <div>
+      <h2>Operations Research & Inventory Optimization</h2>
+      <p>Calculated Safety Stock (SS), Reorder Point (ROP), and Recommended Order Quantity (ROQ).</p>
+    </div>
+  </div>
+
+  <!-- Info Box -->
+  <div class="info-box animate-fadein-d1">
+    <i data-lucide="info" class="w-4 h-4 text-sky-400 flex-shrink-0 mt-0.5"></i>
+    <span><strong>How it works:</strong> For each store-SKU pair, the system calculates Safety Stock (buffer against demand variability), Reorder Point (when to order), Target Stock Level (maximum desired stock), and Recommended Order Quantity (how many units to procure).</span>
+  </div>
+
+  <!-- Formula Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 animate-fadein-d2">
+    <div class="glass-card p-4 text-center">
+      <i data-lucide="shield" class="w-5 h-5 text-emerald-400 mx-auto mb-2"></i>
+      <p class="text-xs text-zinc-400 mb-1">Safety Stock</p>
+      <p class="text-sm font-mono text-emerald-400 font-semibold">SS = Z · σ_d · √L</p>
+    </div>
+    <div class="glass-card p-4 text-center">
+      <i data-lucide="flag" class="w-5 h-5 text-sky-400 mx-auto mb-2"></i>
+      <p class="text-xs text-zinc-400 mb-1">Reorder Point</p>
+      <p class="text-sm font-mono text-sky-400 font-semibold">ROP = (d·L) + SS</p>
+    </div>
+    <div class="glass-card p-4 text-center">
+      <i data-lucide="target" class="w-5 h-5 text-amber-400 mx-auto mb-2"></i>
+      <p class="text-xs text-zinc-400 mb-1">Target Stock Level</p>
+      <p class="text-sm font-mono text-amber-400 font-semibold">TSL = ROP + (d·R)</p>
+    </div>
+    <div class="glass-card p-4 text-center">
+      <i data-lucide="package-plus" class="w-5 h-5 text-violet-400 mx-auto mb-2"></i>
+      <p class="text-xs text-zinc-400 mb-1">Order Quantity</p>
+      <p class="text-sm font-mono text-violet-400 font-semibold">ROQ = max(0, TSL−S)</p>
+    </div>
+  </div>
+
+  <!-- Data Table -->
+  <div class="glass-card p-6 overflow-x-auto animate-fadein-d3">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-base font-semibold text-white flex items-center gap-2">
+        <i data-lucide="table" class="w-4 h-4 text-emerald-400"></i>
+        Store-Item Inventory Replenishment Table
+      </h3>
+      <button onclick="exportCSV()" class="btn btn-primary text-xs py-1.5 px-3 flex items-center gap-1.5" data-tooltip="Download as CSV">
+        <i data-lucide="download" class="w-3.5 h-3.5"></i> Export CSV
+      </button>
+    </div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Store</th>
+          <th>SKU</th>
+          <th>Category</th>
+          <th class="text-right">Daily Demand</th>
+          <th class="text-right">Safety Stock</th>
+          <th class="text-right">Reorder Point</th>
+          <th class="text-right">Current Stock</th>
+          <th class="text-right">Reorder Qty</th>
+          <th class="text-center">Status</th>
+        </tr>
+      </thead>
+      <tbody id="inventory-table-body">
+        <!-- Rendered via JS -->
+      </tbody>
+    </table>
+  </div>
+</div>
