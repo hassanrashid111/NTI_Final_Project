@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FavraAI — Enterprise Retail Intelligence Platform. AI-powered demand forecasting and inventory optimization for 54+ retail stores." />
+  <title>FavraAI — Enterprise Retail Intelligence Platform</title>
+
+  <!-- Tailwind CSS CDN Config -->
+  <script>
+    window.tailwind = { config: { darkMode: 'class', theme: { extend: {} } } };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Google Fonts: Inter + Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#060a08] text-green-50 flex min-h-screen">
+
+  <!-- ═══════════════════════════════════════════════════════
+       SIDEBAR — Clean, Minimal, Professional
+       ═══════════════════════════════════════════════════════ -->
+  <aside id="app-sidebar" class="w-[260px] bg-[#081410]/95 backdrop-blur-xl border-r border-[#1a3328]/60 flex flex-col justify-between shrink-0 h-screen sticky top-0 animate-slide-left">
+    <div>
+      <!-- Brand Header -->
+      <div class="px-5 py-5 border-b border-[#1a3328]/50">
+        <div class="flex items-center gap-3">
+          <div class="relative group">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-[#1a6b4a] to-[#22c55e] rounded-xl blur opacity-30 group-hover:opacity-60 transition duration-300"></div>
+            <img src="assets/images/logo.png" alt="FavraAI Logo" class="relative w-10 h-10 object-contain rounded-xl border border-[#1a6b4a]/40 p-1 bg-[#081410]/90 shadow-lg shadow-[#0a3d28]/50 transition-transform duration-300 group-hover:scale-105" />
+          </div>
+          <div>
+            <h1 class="font-extrabold text-[1.1rem] tracking-tight brand-gradient leading-tight" style="font-family:'Outfit',sans-serif">FavraAI</h1>
+            <p class="text-[9px] text-[#86efac] uppercase tracking-[0.14em] font-semibold">Retail Intelligence</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="px-3 py-4">
+        <!-- Main Section -->
+        <p class="px-3 mb-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-[#4ade80]/50">Main</p>
+        <div class="space-y-0.5">
+          <a href="#dashboard" class="nav-link active" data-tooltip="Overview of KPIs, charts & alerts">
+            <span class="nav-icon"><i data-lucide="layout-dashboard" class="w-[17px] h-[17px]"></i></span>
+            <span>Dashboard</span>
+          </a>
+          <a href="#upload" class="nav-link" data-tooltip="Upload CSV or load sample datasets">
+            <span class="nav-icon"><i data-lucide="upload-cloud" class="w-[17px] h-[17px]"></i></span>
+            <span>Data Upload</span>
+          </a>
+          <a href="#forecast" class="nav-link" data-tooltip="16-day demand predictions">
+            <span class="nav-icon"><i data-lucide="activity" class="w-[17px] h-[17px]"></i></span>
+            <span>Forecast Engine</span>
+          </a>
+          <a href="#inventory" class="nav-link" data-tooltip="SS, ROP, TSL, ROQ table">
+            <span class="nav-icon"><i data-lucide="package" class="w-[17px] h-[17px]"></i></span>
+            <span>Inventory</span>
+          </a>
+          <a href="#alerts" class="nav-link" data-tooltip="Critical understock procurement alerts">
+            <span class="nav-icon"><i data-lucide="alert-triangle" class="w-[17px] h-[17px]"></i></span>
+            <span>Risk Alerts</span>
+            <span class="nav-badge">63K</span>
+          </a>
+        </div>
+
+        <!-- Analytics Section -->
+        <p class="px-3 mt-5 mb-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-[#4ade80]/50">Analytics</p>
+        <div class="space-y-0.5">
+          <a href="#stores" class="nav-link" data-tooltip="Store network performance comparison">
+            <span class="nav-icon"><i data-lucide="store" class="w-[17px] h-[17px]"></i></span>
+            <span>Stores</span>
+          </a>
+          <a href="#analytics" class="nav-link" data-tooltip="Category-level demand analysis">
+            <span class="nav-icon"><i data-lucide="trending-up" class="w-[17px] h-[17px]"></i></span>
+            <span>Categories</span>
+          </a>
+          <a href="#model" class="nav-link" data-tooltip="Model benchmarks & hardware specs">
+            <span class="nav-icon"><i data-lucide="cpu" class="w-[17px] h-[17px]"></i></span>
+            <span>Model & GPU</span>
+          </a>
+        </div>
+
+        <!-- System Section -->
+        <p class="px-3 mt-5 mb-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-[#4ade80]/50">System</p>
+        <div class="space-y-0.5">
+          <a href="#guide" class="nav-link" data-tooltip="Learn how FavraAI works">
+            <span class="nav-icon"><i data-lucide="book-open" class="w-[17px] h-[17px]"></i></span>
+            <span>Guide</span>
+          </a>
+          <a href="#settings" class="nav-link" data-tooltip="Configure OR thresholds">
+            <span class="nav-icon"><i data-lucide="settings" class="w-[17px] h-[17px]"></i></span>
+            <span>Settings</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Sidebar Footer -->
+    <div class="px-4 py-4 border-t border-[#1a3328]/50 bg-[#081410]/50">
+      <!-- Engine Status -->
+      <div class="flex items-center gap-2 mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse"></span>
+        <span class="text-[10px] text-[#22c55e]/80 font-medium">LightGBM GPU Ready</span>
+      </div>
+      <!-- Hardware -->
+      <div class="flex items-center gap-2 text-[10px] text-[#4ade80]/50">
+        <i data-lucide="monitor" class="w-3 h-3"></i>
+        <span>RTX 4050 · 125M Rows · Offline</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MAIN APPLICATION WRAPPER
+       ═══════════════════════════════════════════════════════ -->
+  <div class="flex-1 flex flex-col min-w-0">
+
+    <!-- ═══════════════ TOP NAVBAR — Executive SaaS Design ═══════════════ -->
+    <header class="h-16 border-b border-[#1a3328]/60 bg-[#060a08]/80 backdrop-blur-2xl px-6 flex items-center justify-between sticky top-0 z-30 animate-fadein-d1">
+      <!-- Left: Status Badges -->
+      <div class="flex items-center gap-3">
+        <div id="system-status-badge" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1a6b4a]/15 border border-[#1a6b4a]/30 shadow-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]"></span>
+          </span>
+          <span class="text-xs text-[#22c55e] font-semibold tracking-tight">FastAPI GPU Connected</span>
+        </div>
+        <span class="text-[#1a3328] hidden sm:inline">|</span>
+        <div id="active-dataset-badge" class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#081410]/80 border border-[#1a3328]/60 text-xs text-[#86efac] font-mono">
+          <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#38bdf8]"></i>
+          <span>Aug 01 → Aug 16, 2017 (16 Days)</span>
+        </div>
+      </div>
+
+      <!-- Center: Universal Search Bar -->
+      <div class="flex-1 max-w-md mx-6 hidden md:block">
+        <div class="relative group">
+          <i data-lucide="search" class="w-4 h-4 text-[#4ade80]/50 absolute left-3.5 top-1/2 -translate-y-1/2 group-hover:text-[#22c55e] transition-colors"></i>
+          <input type="text" placeholder="Search Store # (1-54), SKU, or Product Category..."
+                 class="w-full bg-[#081410]/90 border border-[#1a3328]/80 rounded-xl pl-10 pr-12 py-2 text-xs text-green-100 placeholder:text-[#4ade80]/40 focus:outline-none focus:border-[#1a6b4a]/60 focus:ring-2 focus:ring-[#1a6b4a]/15 transition-all shadow-inner" />
+          <kbd class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono text-[#4ade80]/50 bg-[#0d1912] border border-[#1a3328]/60 rounded">⌘K</kbd>
+        </div>
+      </div>
+
+      <!-- Right: Notification & Actions & User Profile -->
+      <div class="flex items-center gap-3">
+        <!-- Notification Bell (opens drawer) -->
+        <button onclick="toggleNotificationDrawer()" class="relative p-2 rounded-xl bg-[#081410]/80 border border-[#1a3328]/60 text-[#86efac] hover:text-white hover:border-[#1a6b4a]/50 transition-all group" data-tooltip="Notification Center">
+          <i data-lucide="bell" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-[#fb7185] rounded-full animate-ping"></span>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-[#fb7185] rounded-full"></span>
+        </button>
+
+        <!-- Run Inference Button -->
+        <button onclick="checkHealth()" class="btn btn-primary flex items-center gap-2 py-2 px-4 text-xs font-semibold rounded-xl" data-tooltip="Check system health & execute model inference">
+          <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+          <span>Run Inference</span>
+        </button>
+
+        <!-- User Profile Avatar -->
+        <div class="flex items-center gap-2 pl-2 border-l border-[#1a3328]/80">
+          <div class="relative">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-[#1a6b4a] to-[#22c55e] p-0.5 shadow-md">
+              <div class="w-full h-full bg-[#081410] rounded-[10px] flex items-center justify-center font-extrabold text-xs text-[#22c55e]">
+                FA
+              </div>
+            </div>
+            <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-[#22c55e] border-2 border-[#060a08] rounded-full"></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dynamic Content Area -->
+    <main id="app-content" class="flex-1 overflow-y-auto min-h-0">
+      <!-- Pages rendered dynamically by assets/js/app.js -->
+    </main>
+  </div>
+
+  <!-- Notification Overlay -->
+  <div id="notification-overlay" class="notification-overlay" onclick="toggleNotificationDrawer()"></div>
+
+  <!-- Notification Drawer -->
+  <div id="notification-drawer" class="notification-drawer">
+    <div class="notification-drawer-header">
+      <h3 style="display:flex;align-items:center;gap:8px;"><i data-lucide="bell" style="width:18px;height:18px;color:#22c55e;"></i> Notifications</h3>
+      <button onclick="toggleNotificationDrawer()" style="background:rgba(26,107,74,0.1); border:1px solid rgba(26,107,74,0.2); color:#86efac; width:28px; height:28px; border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+        <i data-lucide="x" style="width:14px;height:14px;"></i>
+      </button>
+    </div>
+    <div class="notification-drawer-body" id="notification-list">
+      <div class="notification-item">
+        <div class="notif-dot" style="background:#fb7185;"></div>
+        <div class="notif-content">
+          <h5>🚨 Auto PO #8492 Generated</h5>
+          <p>Store #12 · SKU-492102 · 1,420 units ordered for immediate fulfillment</p>
+          <div class="notif-time">2 mins ago</div>
+        </div>
+      </div>
+      <div class="notification-item">
+        <div class="notif-dot" style="background:#22c55e;"></div>
+        <div class="notif-content">
+          <h5>✅ LightGBM GPU Inference Complete</h5>
+          <p>16-Day predictions updated — 2,400 rows processed in 0.85s on RTX 4050</p>
+          <div class="notif-time">5 mins ago</div>
+        </div>
+      </div>
+      <div class="notification-item">
+        <div class="notif-dot" style="background:#38bdf8;"></div>
+        <div class="notif-content">
+          <h5>📊 Dataset Loaded Successfully</h5>
+          <p>Grocery & Cleaning sample (2,400 rows) — Feature engineering complete</p>
+          <div class="notif-time">12 mins ago</div>
+        </div>
+      </div>
+      <div class="notification-item">
+        <div class="notif-dot" style="background:#fbbf24;"></div>
+        <div class="notif-content">
+          <h5>⚠️ Service Level Adjusted</h5>
+          <p>Z-score threshold → 1.65 (95% cycle service level for OR calculations)</p>
+          <div class="notif-time">34 mins ago</div>
+        </div>
+      </div>
+      <div class="notification-item">
+        <div class="notif-dot" style="background:#a78bfa;"></div>
+        <div class="notif-content">
+          <h5>🧠 Champion Model Re-indexed</h5>
+          <p>champion_model.joblib validated — 64 features, RMSLE 0.0298 on holdout</p>
+          <div class="notif-time">1 hour ago</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- App Script -->
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
